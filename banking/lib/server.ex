@@ -18,12 +18,14 @@ defmodule Banking.Server do
     end
 
     def handle_call(arg, _from, state) do
-      IO.puts "lets inspect......"
-      IO.inspect state
-      IO.inspect arg
+      log("received call with arguments: #{inspect arg}")
+      log("current state: #{inspect state}")
       resp = Banking.CustomerAccounts.update_account(state[:accounts], arg)
-      IO.inspect "recevd resp"
-      IO.inspect resp
       {:reply, resp, state}
     end
+
+    def log(msg) do
+      Utils.log("Server: #{inspect self} #{msg}")
+    end
+
 end
