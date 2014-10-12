@@ -2,8 +2,8 @@ defmodule Banking.ServerTest do
 
   use ExUnit.Case, async: true
   setup do
-    {:ok, bank_server} = Banking.Server.start_link()
-    {:ok, bank_server: bank_server}
+    [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(3)
+    {:ok, bank_server: head_server}
   end
 
   test "Deposit requests to server", %{bank_server: bank_server} do

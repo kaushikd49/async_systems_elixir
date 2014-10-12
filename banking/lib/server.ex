@@ -31,7 +31,7 @@ defmodule Banking.Server do
       server_side_req_id = get_server_side_req_id(arg[:req_id], arg[:account_name], arg[:type])
       processed_trans = state[:processed_trans][server_side_req_id] 
       [response, new_state] = 
-        cond do 
+        cond do
           processed_trans != nil -> 
             [processed_trans, nil]  
           is_inconsistent?(state[:processed_trans], server_side_req_id) ->
