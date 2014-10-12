@@ -7,16 +7,16 @@ defmodule Banking.Server do
       GenServer.call(server, arg)
     end
   
-    def deposit(server, req_id, account_num, amount) do
-      GenServer.call(server, [req_id: req_id, type: :deposit, account_num: account_num, amount: amount])
+    def deposit(server, req_id, account_name, amount) do
+      GenServer.call(server, [req_id: req_id, type: :deposit, account_name: account_name, amount: amount])
     end
 
-    def withdraw(server, req_id, account_num, amount) do
-      GenServer.call(server, [req_id: req_id, type: :withdraw, account_num: account_num, amount: amount])
+    def withdraw(server, req_id, account_name, amount) do
+      GenServer.call(server, [req_id: req_id, type: :withdraw, account_name: account_name, amount: amount])
     end
 
-    def get_balance(server, req_id, account_num) do
-      GenServer.call(server, [req_id: req_id, type: :get_balance, account_num: account_num])
+    def get_balance(server, req_id, account_name) do
+      GenServer.call(server, [req_id: req_id, type: :get_balance, account_name: account_name])
     end
 
     def init(opts) do

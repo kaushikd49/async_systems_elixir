@@ -7,25 +7,28 @@ defmodule Banking.ServerTest do
   end
 
 
-      test "Deposit requests to server", %{bank_server: bank_server} do
-        make_call_and_assert(bank_server, [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 1000)
-        make_call_and_assert(bank_server, [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 2000) 
-        make_call_and_assert(bank_server, [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 1000)
-        make_call_and_assert(bank_server, [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 2000) 
-        make_call_and_assert(bank_server, [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000 ], :Processed, 1000)
-      end
+  test "Deposit requests to server", %{bank_server: bank_server} do
+    deposit_and_assert(bank_server, "1.1.1", "123", 1000, :Processed, 1000)
+      deposit_and_assert(bank_server, "1.2.1", "123", 1000, :Processed, 2000) 
+      deposit_and_assert(bank_server, "1.1.1", "123", 1000, :Processed, 1000)
+      deposit_and_assert(bank_server, "1.2.1", "123", 1000, :Processed, 2000) 
+      deposit_and_assert(bank_server, "1.3.1", "124", 1000, :Processed, 1000)
+    end
 
-  test "Withdraw requests to server", %{bank_server: bank_server} do
-    make_call_and_assert(bank_server, [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000 ], :Processed, 1000)
-    make_call_and_assert(bank_server, [req_id: "1.3.0", type: :withdraw, account_name: "124", amount: 1000 ], :InconsistentWithHistory, 1000)
-    make_call_and_assert(bank_server, [req_id: "1.3.1", type: :withdraw, account_name: "124", amount: 1000 ], :Processed, 0)
-    make_call_and_assert(bank_server, [req_id: "1.3.2", type: :withdraw, account_name: "125", amount: 1000 ], :InsufficientFunds, 0)
+    test "Withdraw requests to server", %{bank_server: bank_server} do
+      deposit_and_assert(bank_server, "1.3.0", "124", 1000, :Processed, 1000)
+      withdraw_and_assert(bank_server, "1.3.0", "124", 1000, :InconsistentWithHistory, 1000)
+      withdraw_and_assert(bank_server, "1.3.1", "124", 1000, :Processed, 0)
+      withdraw_and_assert(bank_server, "1.3.2", "125", 1000, :InsufficientFunds, 0)
+    end
+
+  def deposit_and_assert(bank_server, req_id, account_name, amount, outcome, balance) do
+    resp = Banking.Server.deposit(bank_server, req_id, account_name, amount)
+    assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
   end
 
-  def make_call_and_assert(bank_server, arg, outcome, balance) do
-    resp = Banking.Server.make_transaction(bank_server, arg)
-    assert [req_id: arg[:req_id], outcome: outcome, balance: balance, account_name: arg[:account_name]] == resp
-  end
-
-
+  def withdraw_and_assert(bank_server, req_id, account_name, amount, outcome, balance) do
+    resp = Banking.Server.withdraw(bank_server, req_id, account_name, amount)
+    assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
+   end
 end
