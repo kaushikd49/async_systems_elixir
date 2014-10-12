@@ -62,7 +62,8 @@ defmodule Banking.Server do
       id_parts = String.split(server_side_req_id, "_")
       [req_id|tail1] = id_parts
       [account_name|tail2] = tail1
-      res = (is_present_trans(processed_trans, req_id, account_name, :deposit) || is_present_trans(processed_trans, req_id, account_name, :withdraw))
+      res = (is_present_trans(processed_trans, req_id, account_name, :deposit) || 
+            is_present_trans(processed_trans, req_id, account_name, :withdraw))
       res
     end
 
