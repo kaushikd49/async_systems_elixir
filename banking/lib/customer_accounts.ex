@@ -5,10 +5,10 @@ defmodule Banking.CustomerAccounts do
     agent
   end
 
-  # fetch account information for the given account_id
-  def get_account(agent, account_id) do
+  # fetch account information for the given account_name
+  def get_balance(agent, account_name) do
     hash =  Agent.get(agent, fn hdict -> hdict end)
-    HashDict.get(hash, account_id)
+    HashDict.get(hash, account_name)
   end
 
   # handle update operations on accounts
@@ -16,22 +16,23 @@ defmodule Banking.CustomerAccounts do
     res = 
        case arg[:type] do
          :deposit -> 
-           do_deposit(agent, arg)  
-         :withdraw -> "do withdraw"
-           do_withdraw(agent, arg) 
-         :get_bal -> "do get bal"
+            do_deposit(agent, arg)
+         :withdraw ->
+            do_withdraw(agent, arg) 
+         :get_bal -> 
+            :Processed
        end
   end
 
   def do_deposit(agent, arg) do
     Agent.update(agent, fn hdict -> 
-    [id, amount] = [arg[:id], arg[:amount]]
-    bal = hdict[id]
+    [account_name, amount] = [arg[:account_name], arg[:amount]]
+    bal = hdict[account_name]
     bal = if bal do bal + amount else amount end
-    Utils.log("Balance for account #{id} after deposit is #{bal}")
-    HashDict.put(hdict, arg[:id], bal) 
+    Utils.log("Balance for account #{account_name} after deposit is #{bal}")
+    HashDict.put(hdict, arg[:account_name], bal) 
     end)
-    get_account(agent, arg[:id])
+    :Processed
   end
 
   def do_withdraw(agent, arg) do
