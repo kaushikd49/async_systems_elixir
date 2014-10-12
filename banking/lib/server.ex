@@ -36,6 +36,8 @@ defmodule Banking.Server do
             [processed_trans, nil]  
           is_inconsistent?(state[:processed_trans], server_side_req_id) ->
             return_response(server_side_req_id, :InconsistentWithHistory, state, arg)
+          arg[:type] == :get_balance ->  
+            return_response(server_side_req_id, :Processed, state, arg)
           true -> 
             outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
             return_response(server_side_req_id, outcome, state, arg)
