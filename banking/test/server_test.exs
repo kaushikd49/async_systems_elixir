@@ -10,6 +10,8 @@ defmodule Banking.ServerTest do
   test "Deposit requests to server", %{bank_server: bank_server} do
     assert make_call_to_server(bank_server, [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 1000)
     assert make_call_to_server(bank_server, [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 2000) 
+    assert make_call_to_server(bank_server, [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 1000)
+    assert make_call_to_server(bank_server, [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000 ], :Processed, 2000) 
     assert make_call_to_server(bank_server, [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000 ], :Processed, 1000)
   end
 

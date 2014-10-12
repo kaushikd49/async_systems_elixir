@@ -30,18 +30,18 @@ defmodule Banking.Server do
       log("current state: #{inspect state}")
       server_side_req_id = get_server_side_req_id(arg[:req_id], arg[:account_name], arg[:type])
       processed_trans = state[:processed_trans][server_side_req_id] 
-      response = 
+      [response, new_state] = 
         cond do 
           processed_trans != nil -> 
-            processed_trans  
+            [processed_trans, nil]  
           is_inconsistent?(processed_trans, server_side_req_id) ->
             return_response(server_side_req_id, :InconsistentWithHistory, state, arg)
           true -> 
              outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
              return_response(server_side_req_id, outcome, state, arg)
         end
-        log("sending response: #{inspect response}")
-      {:reply, response, state } # todo : fix this
+       log("sending response: #{inspect response}")
+      {:reply, response, (new_state || state)} 
    end
 
     # Function that handles response construction and saves it too.
@@ -51,7 +51,7 @@ defmodule Banking.Server do
       resp = [req_id: arg[:req_id], outcome: outcome, balance: balance, account_name: account]  
       sub_hash = HashDict.put(state[:processed_trans], server_side_req_id, resp)
       state = add_nested_hashdict(state, :processed_trans, server_side_req_id, resp)
-      resp
+      [resp, state]
     end
 
 
