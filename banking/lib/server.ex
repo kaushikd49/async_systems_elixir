@@ -34,7 +34,7 @@ defmodule Banking.Server do
         cond do 
           processed_trans != nil -> 
             [processed_trans, nil]  
-          is_inconsistent?(processed_trans, server_side_req_id) ->
+          is_inconsistent?(state[:processed_trans], server_side_req_id) ->
             return_response(server_side_req_id, :InconsistentWithHistory, state, arg)
           true -> 
             outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
@@ -46,6 +46,7 @@ defmodule Banking.Server do
 
     # Function that handles response construction and saves it too.
     def return_response(server_side_req_id, outcome, state, arg) do
+      IO.puts "outcome is #{outcome}"
       account = arg[:account_name]
       balance = Banking.CustomerAccounts.get_balance(state[:accounts], account) 
       resp = [req_id: arg[:req_id], outcome: outcome, balance: balance, account_name: account]  
@@ -59,12 +60,13 @@ defmodule Banking.Server do
       id_parts = String.split(server_side_req_id, "_")
       [req_id|tail1] = id_parts
       [account_name|tail2] = tail1
-      (is_present_trans(processed_trans, req_id, account_name, :Processed) || is_present_trans(processed_trans, req_id, account_name, :InconsistentWithHistory) || is_present_trans(processed_trans, req_id, account_name, :InsufficientFunds))
+      res = (is_present_trans(processed_trans, req_id, account_name, :deposit) || is_present_trans(processed_trans, req_id, account_name, :withdraw))
+      res
     end
 
     def is_present_trans(processed_trans, req_id, account_name, type) do
       temp = get_server_side_req_id(req_id, account_name, type)
-      processed_trans[temp]
+      processed_trans[temp] != nil
     end
 
 

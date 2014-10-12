@@ -51,9 +51,8 @@ defmodule Banking.CustomerAccounts do
             [account_name, amount] = [arg[:account_name], arg[:amount]]
             bal = hdict[account_name]
             bal = bal - amount 
-            HashDict.put(hdict, arg[:account_name], bal - amount) 
             Utils.log("Balance for account #{account_name} after withdrawal is #{bal}")
-          hdict
+            HashDict.put(hdict, arg[:account_name], bal) 
         end)
        :Processed 
     end
