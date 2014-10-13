@@ -86,4 +86,20 @@ defmodule Banking.Server do
       Utils.log("Server: #{inspect self} #{msg}")
     end
 
+    def cast_call(server, arg) do
+      log "makin cast call"
+      r = GenServer.cast(server, arg)
+    end
+
+    # todo : async move llike below
+    #def create(server, name) do
+    #GenServer.cast(server, name)
+    #end
+    #
+    #
+    #   def handle_cast(name, names) do
+    #    IO.puts "blahskdalda"
+    #    {:noreply, "asd"}
+    #  end
+
 end
