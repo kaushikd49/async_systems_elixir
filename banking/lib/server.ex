@@ -21,7 +21,8 @@ defmodule Banking.Server do
 
     def init(opts) do
       accounts = Banking.CustomerAccounts.init()
-      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new]
+      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], 
+        ip_addr: elem(opts[:ip_addr], opts[:index]), port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length]]
       {:ok, response}
     end
 
