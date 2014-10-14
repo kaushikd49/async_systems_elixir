@@ -1,0 +1,212 @@
+2014-10-13 23:58:03.143 [info] Server: #PID<0.105.0> created server with definition [next: nil, accounts: #PID<0.107.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: nil] sleeping for 1ms before initing
+2014-10-13 23:58:03.143 [info] Server: #PID<0.106.0> created server with definition [next: nil, accounts: #PID<0.108.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.145 [info] Server: #PID<0.109.0> created server with definition [next: #PID<0.105.0>, accounts: #PID<0.110.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: nil] sleeping for 1ms before initing
+2014-10-13 23:58:03.147 [info] Server: #PID<0.111.0> created server with definition [next: #PID<0.109.0>, accounts: #PID<0.112.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: nil] sleeping for 1ms before initing
+2014-10-13 23:58:03.149 [info] Server: #PID<0.113.0> created server with definition [next: #PID<0.111.0>, accounts: #PID<0.114.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "110.120.12.1", port: 80, delay: 1, chain_length: nil] sleeping for 1ms before initing
+.2014-10-13 23:58:03.154 [info] Server: #PID<0.115.0> created server with definition [next: #PID<0.106.0>, accounts: #PID<0.116.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.165 [info] Server: #PID<0.117.0> created server with definition [next: #PID<0.115.0>, accounts: #PID<0.118.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.177 [info] Server: #PID<0.119.0> created server with definition [next: #PID<0.117.0>, accounts: #PID<0.120.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.190 [info] BankingServerChain: servers initialized are {#PID<0.119.0>, #PID<0.117.0>, #PID<0.115.0>, #PID<0.106.0>}
+2014-10-13 23:58:03.190 [info] BankingServerChain: head and tail servers are [#PID<0.119.0>, #PID<0.106.0>]
+2014-10-13 23:58:03.190 [info] Server: #PID<0.119.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.190 [info] Server: #PID<0.119.0> current state: [next: #PID<0.117.0>, accounts: #PID<0.120.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.192 [info] Balance for account 123 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.192 [info] Server: #PID<0.119.0> passing update to next server #PID<0.117.0>
+2014-10-13 23:58:03.192 [info] Server: #PID<0.117.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.192 [info] Server: #PID<0.117.0> current state: [next: #PID<0.115.0>, accounts: #PID<0.118.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.193 [info] Balance for account 123 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.193 [info] Server: #PID<0.117.0> passing update to next server #PID<0.115.0>
+2014-10-13 23:58:03.193 [info] Server: #PID<0.115.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.193 [info] Server: #PID<0.115.0> current state: [next: #PID<0.106.0>, accounts: #PID<0.116.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.193 [info] Balance for account 123 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.193 [info] Server: #PID<0.115.0> passing update to next server #PID<0.106.0>
+2014-10-13 23:58:03.194 [info] Server: #PID<0.106.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.194 [info] Server: #PID<0.106.0> current state: [next: nil, accounts: #PID<0.108.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.194 [info] Balance for account 123 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.194 [info] Server: #PID<0.106.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]
+2014-10-13 23:58:03.194 [info] Server: #PID<0.119.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.195 [info] Server: #PID<0.119.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}]>, next: #PID<0.117.0>, accounts: #PID<0.120.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.195 [info] Balance for account 123 after deposit is 2000
+outcome is Processed
+2014-10-13 23:58:03.195 [info] Server: #PID<0.119.0> passing update to next server #PID<0.117.0>
+2014-10-13 23:58:03.195 [info] Server: #PID<0.117.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.195 [info] Server: #PID<0.117.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}]>, next: #PID<0.115.0>, accounts: #PID<0.118.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.195 [info] Balance for account 123 after deposit is 2000
+outcome is Processed
+2014-10-13 23:58:03.196 [info] Server: #PID<0.117.0> passing update to next server #PID<0.115.0>
+2014-10-13 23:58:03.196 [info] Server: #PID<0.115.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.196 [info] Server: #PID<0.115.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}]>, next: #PID<0.106.0>, accounts: #PID<0.116.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.196 [info] Balance for account 123 after deposit is 2000
+outcome is Processed
+2014-10-13 23:58:03.196 [info] Server: #PID<0.115.0> passing update to next server #PID<0.106.0>
+2014-10-13 23:58:03.196 [info] Server: #PID<0.106.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.197 [info] Server: #PID<0.106.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}]>, next: nil, accounts: #PID<0.108.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.197 [info] Balance for account 123 after deposit is 2000
+outcome is Processed
+2014-10-13 23:58:03.197 [info] Server: #PID<0.106.0> tail sending response: [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]
+2014-10-13 23:58:03.197 [info] Server: #PID<0.119.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.197 [info] Server: #PID<0.119.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.117.0>, accounts: #PID<0.120.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.198 [info] Server: #PID<0.119.0> passing update to next server #PID<0.117.0>
+2014-10-13 23:58:03.198 [info] Server: #PID<0.117.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.198 [info] Server: #PID<0.117.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.115.0>, accounts: #PID<0.118.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.198 [info] Server: #PID<0.117.0> passing update to next server #PID<0.115.0>
+2014-10-13 23:58:03.198 [info] Server: #PID<0.115.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.199 [info] Server: #PID<0.115.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.106.0>, accounts: #PID<0.116.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.199 [info] Server: #PID<0.115.0> passing update to next server #PID<0.106.0>
+2014-10-13 23:58:03.199 [info] Server: #PID<0.106.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.199 [info] Server: #PID<0.106.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: nil, accounts: #PID<0.108.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.199 [info] Server: #PID<0.106.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]
+2014-10-13 23:58:03.199 [info] Server: #PID<0.119.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.200 [info] Server: #PID<0.119.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.117.0>, accounts: #PID<0.120.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.200 [info] Server: #PID<0.119.0> passing update to next server #PID<0.117.0>
+2014-10-13 23:58:03.200 [info] Server: #PID<0.117.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.200 [info] Server: #PID<0.117.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.115.0>, accounts: #PID<0.118.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.200 [info] Server: #PID<0.117.0> passing update to next server #PID<0.115.0>
+2014-10-13 23:58:03.200 [info] Server: #PID<0.115.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.201 [info] Server: #PID<0.115.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.106.0>, accounts: #PID<0.116.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.201 [info] Server: #PID<0.115.0> passing update to next server #PID<0.106.0>
+2014-10-13 23:58:03.201 [info] Server: #PID<0.106.0> received call with arguments: [req_id: "1.2.1", type: :deposit, account_name: "123", amount: 1000]
+2014-10-13 23:58:03.201 [info] Server: #PID<0.106.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: nil, accounts: #PID<0.108.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.201 [info] Server: #PID<0.106.0> tail sending response: [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]
+2014-10-13 23:58:03.202 [info] Server: #PID<0.119.0> received call with arguments: [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.202 [info] Server: #PID<0.119.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.117.0>, accounts: #PID<0.120.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.202 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.202 [info] Server: #PID<0.119.0> passing update to next server #PID<0.117.0>
+2014-10-13 23:58:03.202 [info] Server: #PID<0.117.0> received call with arguments: [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.203 [info] Server: #PID<0.117.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.115.0>, accounts: #PID<0.118.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.203 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.203 [info] Server: #PID<0.117.0> passing update to next server #PID<0.115.0>
+2014-10-13 23:58:03.203 [info] Server: #PID<0.115.0> received call with arguments: [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.203 [info] Server: #PID<0.115.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: #PID<0.106.0>, accounts: #PID<0.116.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.203 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.204 [info] Server: #PID<0.115.0> passing update to next server #PID<0.106.0>
+2014-10-13 23:58:03.204 [info] Server: #PID<0.106.0> received call with arguments: [req_id: "1.3.1", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.204 [info] Server: #PID<0.106.0> current state: [processed_trans: #HashDict<[{"1.1.1_123_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1000, account_name: "123"]}, {"1.2.1_123_deposit", [req_id: "1.2.1", outcome: :Processed, balance: 2000, account_name: "123"]}]>, next: nil, accounts: #PID<0.108.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.204 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.204 [info] Server: #PID<0.106.0> tail sending response: [req_id: "1.3.1", outcome: :Processed, balance: 1000, account_name: "124"]
+.2014-10-13 23:58:03.205 [info] Server: #PID<0.122.0> created server with definition [next: nil, accounts: #PID<0.123.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.216 [info] Server: #PID<0.124.0> created server with definition [next: #PID<0.122.0>, accounts: #PID<0.125.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.227 [info] Server: #PID<0.126.0> created server with definition [next: #PID<0.124.0>, accounts: #PID<0.127.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.238 [info] Server: #PID<0.128.0> created server with definition [next: #PID<0.126.0>, accounts: #PID<0.129.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.249 [info] BankingServerChain: servers initialized are {#PID<0.128.0>, #PID<0.126.0>, #PID<0.124.0>, #PID<0.122.0>}
+2014-10-13 23:58:03.249 [info] BankingServerChain: head and tail servers are [#PID<0.128.0>, #PID<0.122.0>]
+2014-10-13 23:58:03.249 [info] Server: #PID<0.128.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.249 [info] Server: #PID<0.128.0> current state: [next: #PID<0.126.0>, accounts: #PID<0.129.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.250 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.250 [info] Server: #PID<0.128.0> passing update to next server #PID<0.126.0>
+2014-10-13 23:58:03.250 [info] Server: #PID<0.126.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.250 [info] Server: #PID<0.126.0> current state: [next: #PID<0.124.0>, accounts: #PID<0.127.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.250 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.251 [info] Server: #PID<0.126.0> passing update to next server #PID<0.124.0>
+2014-10-13 23:58:03.251 [info] Server: #PID<0.124.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.251 [info] Server: #PID<0.124.0> current state: [next: #PID<0.122.0>, accounts: #PID<0.125.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.251 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.251 [info] Server: #PID<0.124.0> passing update to next server #PID<0.122.0>
+2014-10-13 23:58:03.251 [info] Server: #PID<0.122.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.252 [info] Server: #PID<0.122.0> current state: [next: nil, accounts: #PID<0.123.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.252 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.252 [info] Server: #PID<0.122.0> tail sending response: [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]
+2014-10-13 23:58:03.252 [info] Server: #PID<0.128.0> received call with arguments: [req_id: "1.3.0", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.252 [info] Server: #PID<0.128.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.126.0>, accounts: #PID<0.129.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+outcome is InconsistentWithHistory
+2014-10-13 23:58:03.253 [info] Server: #PID<0.128.0> passing update to next server #PID<0.126.0>
+2014-10-13 23:58:03.253 [info] Server: #PID<0.126.0> received call with arguments: [req_id: "1.3.0", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.253 [info] Server: #PID<0.126.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.124.0>, accounts: #PID<0.127.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+outcome is InconsistentWithHistory
+2014-10-13 23:58:03.253 [info] Server: #PID<0.126.0> passing update to next server #PID<0.124.0>
+2014-10-13 23:58:03.253 [info] Server: #PID<0.124.0> received call with arguments: [req_id: "1.3.0", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.254 [info] Server: #PID<0.124.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.122.0>, accounts: #PID<0.125.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+outcome is InconsistentWithHistory
+2014-10-13 23:58:03.254 [info] Server: #PID<0.124.0> passing update to next server #PID<0.122.0>
+2014-10-13 23:58:03.254 [info] Server: #PID<0.122.0> received call with arguments: [req_id: "1.3.0", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.254 [info] Server: #PID<0.122.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: nil, accounts: #PID<0.123.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+outcome is InconsistentWithHistory
+2014-10-13 23:58:03.255 [info] Server: #PID<0.122.0> tail sending response: [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]
+2014-10-13 23:58:03.255 [info] Server: #PID<0.128.0> received call with arguments: [req_id: "1.3.1", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.255 [info] Server: #PID<0.128.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.126.0>, accounts: #PID<0.129.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.255 [info] Balance for account 124 after withdrawal is 0
+outcome is Processed
+2014-10-13 23:58:03.255 [info] Server: #PID<0.128.0> passing update to next server #PID<0.126.0>
+2014-10-13 23:58:03.255 [info] Server: #PID<0.126.0> received call with arguments: [req_id: "1.3.1", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.256 [info] Server: #PID<0.126.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.124.0>, accounts: #PID<0.127.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.256 [info] Balance for account 124 after withdrawal is 0
+outcome is Processed
+2014-10-13 23:58:03.256 [info] Server: #PID<0.126.0> passing update to next server #PID<0.124.0>
+2014-10-13 23:58:03.256 [info] Server: #PID<0.124.0> received call with arguments: [req_id: "1.3.1", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.257 [info] Server: #PID<0.124.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.122.0>, accounts: #PID<0.125.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.257 [info] Balance for account 124 after withdrawal is 0
+outcome is Processed
+2014-10-13 23:58:03.257 [info] Server: #PID<0.124.0> passing update to next server #PID<0.122.0>
+2014-10-13 23:58:03.257 [info] Server: #PID<0.122.0> received call with arguments: [req_id: "1.3.1", type: :withdraw, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.257 [info] Server: #PID<0.122.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: nil, accounts: #PID<0.123.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.257 [info] Balance for account 124 after withdrawal is 0
+outcome is Processed
+2014-10-13 23:58:03.258 [info] Server: #PID<0.122.0> tail sending response: [req_id: "1.3.1", outcome: :Processed, balance: 0, account_name: "124"]
+2014-10-13 23:58:03.258 [info] Server: #PID<0.128.0> received call with arguments: [req_id: "1.3.2", type: :withdraw, account_name: "125", amount: 1000]
+2014-10-13 23:58:03.258 [info] Server: #PID<0.128.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.1_124_withdraw", [req_id: "1.3.1", outcome: :Processed, balance: 0, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.126.0>, accounts: #PID<0.129.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+outcome is InsufficientFunds
+2014-10-13 23:58:03.258 [info] Server: #PID<0.128.0> passing update to next server #PID<0.126.0>
+2014-10-13 23:58:03.259 [info] Server: #PID<0.126.0> received call with arguments: [req_id: "1.3.2", type: :withdraw, account_name: "125", amount: 1000]
+2014-10-13 23:58:03.259 [info] Server: #PID<0.126.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.1_124_withdraw", [req_id: "1.3.1", outcome: :Processed, balance: 0, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.124.0>, accounts: #PID<0.127.0>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+outcome is InsufficientFunds
+2014-10-13 23:58:03.259 [info] Server: #PID<0.126.0> passing update to next server #PID<0.124.0>
+2014-10-13 23:58:03.259 [info] Server: #PID<0.124.0> received call with arguments: [req_id: "1.3.2", type: :withdraw, account_name: "125", amount: 1000]
+2014-10-13 23:58:03.260 [info] Server: #PID<0.124.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.1_124_withdraw", [req_id: "1.3.1", outcome: :Processed, balance: 0, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: #PID<0.122.0>, accounts: #PID<0.125.0>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+outcome is InsufficientFunds
+2014-10-13 23:58:03.260 [info] Server: #PID<0.124.0> passing update to next server #PID<0.122.0>
+2014-10-13 23:58:03.260 [info] Server: #PID<0.122.0> received call with arguments: [req_id: "1.3.2", type: :withdraw, account_name: "125", amount: 1000]
+2014-10-13 23:58:03.260 [info] Server: #PID<0.122.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_withdraw", [req_id: "1.3.0", outcome: :InconsistentWithHistory, balance: 1000, account_name: "124"]}, {"1.3.1_124_withdraw", [req_id: "1.3.1", outcome: :Processed, balance: 0, account_name: "124"]}, {"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}]>, next: nil, accounts: #PID<0.123.0>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+outcome is InsufficientFunds
+2014-10-13 23:58:03.261 [info] Server: #PID<0.122.0> tail sending response: [req_id: "1.3.2", outcome: :InsufficientFunds, balance: 0, account_name: "125"]
+.2014-10-13 23:58:03.261 [info] Server: #PID<0.131.0> created server with definition [next: nil, accounts: #PID<0.132.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.273 [info] Server: #PID<0.133.0> created server with definition [next: #PID<0.131.0>, accounts: #PID<0.134.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.285 [info] Server: #PID<0.135.0> created server with definition [next: #PID<0.133.0>, accounts: #PID<0.136.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.296 [info] Server: #PID<0.137.0> created server with definition [next: #PID<0.135.0>, accounts: #PID<0.138.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4] sleeping for 10ms before initing
+2014-10-13 23:58:03.308 [info] BankingServerChain: servers initialized are {#PID<0.137.0>, #PID<0.135.0>, #PID<0.133.0>, #PID<0.131.0>}
+2014-10-13 23:58:03.308 [info] BankingServerChain: head and tail servers are [#PID<0.137.0>, #PID<0.131.0>]
+2014-10-13 23:58:03.308 [info] Server: #PID<0.137.0> received call with arguments: [req_id: "1.3.9", type: :get_balance, account_name: "130"]
+2014-10-13 23:58:03.308 [info] Server: #PID<0.137.0> current state: [next: #PID<0.135.0>, accounts: #PID<0.138.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+outcome is Processed
+2014-10-13 23:58:03.309 [info] Server: #PID<0.137.0> tail sending response: [req_id: "1.3.9", outcome: :Processed, balance: 0, account_name: "130"]
+2014-10-13 23:58:03.309 [info] Server: #PID<0.137.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.309 [info] Server: #PID<0.137.0> current state: [processed_trans: #HashDict<[{"1.3.9_130_get_balance", [req_id: "1.3.9", outcome: :Processed, balance: 0, account_name: "130"]}]>, next: #PID<0.135.0>, accounts: #PID<0.138.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.309 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.310 [info] Server: #PID<0.137.0> passing update to next server #PID<0.135.0>
+2014-10-13 23:58:03.310 [info] Server: #PID<0.135.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.310 [info] Server: #PID<0.135.0> current state: [next: #PID<0.133.0>, accounts: #PID<0.136.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.310 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.310 [info] Server: #PID<0.135.0> passing update to next server #PID<0.133.0>
+2014-10-13 23:58:03.310 [info] Server: #PID<0.133.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.311 [info] Server: #PID<0.133.0> current state: [next: #PID<0.131.0>, accounts: #PID<0.134.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.311 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.311 [info] Server: #PID<0.133.0> passing update to next server #PID<0.131.0>
+2014-10-13 23:58:03.311 [info] Server: #PID<0.131.0> received call with arguments: [req_id: "1.3.0", type: :deposit, account_name: "124", amount: 1000]
+2014-10-13 23:58:03.311 [info] Server: #PID<0.131.0> current state: [next: nil, accounts: #PID<0.132.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 10, chain_length: 4]
+2014-10-13 23:58:03.311 [info] Balance for account 124 after deposit is 1000
+outcome is Processed
+2014-10-13 23:58:03.312 [info] Server: #PID<0.131.0> tail sending response: [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]
+2014-10-13 23:58:03.312 [info] Server: #PID<0.137.0> received call with arguments: [req_id: "1.3.9", type: :get_balance, account_name: "124"]
+2014-10-13 23:58:03.312 [info] Server: #PID<0.137.0> current state: [processed_trans: #HashDict<[{"1.3.0_124_deposit", [req_id: "1.3.0", outcome: :Processed, balance: 1000, account_name: "124"]}, {"1.3.9_130_get_balance", [req_id: "1.3.9", outcome: :Processed, balance: 0, account_name: "130"]}]>, next: #PID<0.135.0>, accounts: #PID<0.138.0>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 10, chain_length: 4]
+outcome is Processed
+2014-10-13 23:58:03.312 [info] Server: #PID<0.137.0> tail sending response: [req_id: "1.3.9", outcome: :Processed, balance: 1000, account_name: "124"]
+.
+
+Finished in 0.2 seconds (0.1s on load, 0.1s on tests)
+4 tests, 0 failures
+
+Randomized with seed 127361

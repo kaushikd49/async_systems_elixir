@@ -1,0 +1,14 @@
+The project is in Elixir. It needs Elixar to be installed. -> http://elixir-lang.org/getting_started/1.html
+
+1. Once done, unpack the project contents and go to banking dir.
+2. Then execute mix test to run tests.
+
+
+Tests cover
+Deposit
+Withdrawal
+GetBalance
+
+Each test asserts above tasks are done properly and the balance reflects correctly.
+
+There is test for server, server_chain

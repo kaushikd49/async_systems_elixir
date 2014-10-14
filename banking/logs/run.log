@@ -1,0 +1,32 @@
+false
+loading configuration /Users/kaushik/ms/code/async_github/async_systems_elixir/banking/config/test.exs
+2014-10-13 23:58:53.993 [info] Server: #PID<0.77.0> created server with definition [next: nil, accounts: #PID<0.78.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:53.998 [info] Server: #PID<0.79.0> created server with definition [next: #PID<0.77.0>, accounts: #PID<0.80.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.000 [info] Server: #PID<0.81.0> created server with definition [next: #PID<0.79.0>, accounts: #PID<0.82.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.002 [info] Server: #PID<0.83.0> created server with definition [next: #PID<0.81.0>, accounts: #PID<0.84.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.005 [info] BankingServerChain: servers initialized are {#PID<0.83.0>, #PID<0.81.0>, #PID<0.79.0>, #PID<0.77.0>}
+2014-10-13 23:58:54.005 [info] BankingServerChain: head and tail servers are [#PID<0.83.0>, #PID<0.77.0>]
+2014-10-13 23:58:54.005 [info] Server: #PID<0.85.0> created server with definition [next: nil, accounts: #PID<0.86.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.007 [info] Server: #PID<0.87.0> created server with definition [next: #PID<0.85.0>, accounts: #PID<0.88.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.009 [info] Server: #PID<0.89.0> created server with definition [next: #PID<0.87.0>, accounts: #PID<0.90.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.011 [info] Server: #PID<0.91.0> created server with definition [next: #PID<0.89.0>, accounts: #PID<0.92.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.013 [info] BankingServerChain: servers initialized are {#PID<0.91.0>, #PID<0.89.0>, #PID<0.87.0>, #PID<0.85.0>}
+2014-10-13 23:58:54.013 [info] BankingServerChain: head and tail servers are [#PID<0.91.0>, #PID<0.85.0>]
+2014-10-13 23:58:54.013 [info] Server: #PID<0.93.0> created server with definition [next: nil, accounts: #PID<0.94.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.015 [info] Server: #PID<0.95.0> created server with definition [next: #PID<0.93.0>, accounts: #PID<0.96.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.017 [info] Server: #PID<0.97.0> created server with definition [next: #PID<0.95.0>, accounts: #PID<0.98.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.019 [info] Server: #PID<0.99.0> created server with definition [next: #PID<0.97.0>, accounts: #PID<0.100.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "110.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.021 [info] BankingServerChain: servers initialized are {#PID<0.99.0>, #PID<0.97.0>, #PID<0.95.0>, #PID<0.93.0>}
+2014-10-13 23:58:54.021 [info] BankingServerChain: head and tail servers are [#PID<0.99.0>, #PID<0.93.0>]
+2014-10-13 23:58:54.021 [info] Server: #PID<0.101.0> created server with definition [next: nil, accounts: #PID<0.102.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.023 [info] Server: #PID<0.103.0> created server with definition [next: #PID<0.101.0>, accounts: #PID<0.104.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.025 [info] Server: #PID<0.105.0> created server with definition [next: #PID<0.103.0>, accounts: #PID<0.106.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.027 [info] Server: #PID<0.107.0> created server with definition [next: #PID<0.105.0>, accounts: #PID<0.108.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "111.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
+2014-10-13 23:58:54.029 [info] BankingServerChain: servers initialized are {#PID<0.107.0>, #PID<0.105.0>, #PID<0.103.0>, #PID<0.101.0>}
+2014-10-13 23:58:54.029 [info] BankingServerChain: head and tail servers are [#PID<0.107.0>, #PID<0.101.0>]
+"conf is [method: :get_balance, args: [\"1.1.1\", \"asdasd\"]]"
+2014-10-13 23:58:54.029 [info] Server: #PID<0.83.0> received call with arguments: [req_id: "1.1.1", type: :get_balance, account_name: "asdasd"]
+2014-10-13 23:58:54.029 [info] Server: #PID<0.83.0> current state: [next: #PID<0.81.0>, accounts: #PID<0.84.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.1", port: 80, delay: 1, chain_length: 4]
+outcome is Processed
+2014-10-13 23:58:54.031 [info] Server: #PID<0.83.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "asdasd"]
+2014-10-13 23:58:54.031 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "asdasd"] from [#PID<0.77.0>]

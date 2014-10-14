@@ -1,0 +1,7 @@
+The project is in Elixir. It needs Elixar to be installed. -> http://elixir-lang.org/getting_started/1.html
+
+1. Once done, unpack the project contents and go to banking dir.
+2. To demo, run mix run <current_path>/config/test.exs
+
+BUGS - ip addresses are getting duplicated
+client configs needs to be used to call client performs.
