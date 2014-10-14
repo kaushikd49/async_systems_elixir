@@ -42,7 +42,13 @@ defmodule Banking.Server do
             outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
             return_response(server_side_req_id, outcome, state, arg)
         end
-       log("sending response: #{inspect response}")
+        if state[:next] do
+          log("passing update to next server #{inspect state[:next]}")
+          GenServer.call(state[:next], arg)
+        else
+         log("tail sending response: #{inspect response}")
+        end
+
       {:reply, response, (new_state || state)} 
    end
 

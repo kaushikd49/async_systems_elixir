@@ -41,7 +41,7 @@ defmodule Banking.ServerTest do
       resp = Banking.Server.get_balance(bank_server, req_id, account_name)
       assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
    end
- 
+
    #   test "async call" , %{bank_server: bank_server} do
    #    resp = Banking.Server.create(bank_server, self)
    #    IO.inspect self
