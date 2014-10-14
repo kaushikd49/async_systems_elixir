@@ -8,7 +8,14 @@ use Mix.Config
        
        
        ###  Custom configurations go below ###
-     config :general, 
+     config :general,
+     clients: [
+         [
+           [method: :get_balance, args: ["1.1.1", "asdasd"]],
+           [method: :get_balance, args: ["1.1.1", "asdasd"]]
+         ]
+
+      ], 
      servers: [
        [
          name: :FederalBank,

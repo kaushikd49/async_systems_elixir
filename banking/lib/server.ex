@@ -46,7 +46,7 @@ defmodule Banking.Server do
             outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
             return_response(server_side_req_id, outcome, state, arg)
         end
-        if state[:next] do
+        if state[:next] && arg[:type] != :get_balance do
           log("passing update to next server #{inspect state[:next]}")
           GenServer.call(state[:next], arg)
         else
