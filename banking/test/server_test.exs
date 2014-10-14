@@ -2,7 +2,16 @@ defmodule Banking.ServerTest do
 
   use ExUnit.Case, async: true
   setup do
-    [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(3)
+    bank_conf =
+      [
+         name: :BankOfAmerica,
+         chain_length: 4,
+         ip_addr: {"109.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
+         delay: 1,
+         port: 80
+       ]
+
+     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
     {:ok, bank_server: head_server}
   end
 
