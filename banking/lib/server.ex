@@ -21,8 +21,11 @@ defmodule Banking.Server do
 
     def init(opts) do
       accounts = Banking.CustomerAccounts.init()
+      sleep_time = opts[:delay]
       response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], 
         ip_addr: elem(opts[:ip_addr], opts[:index]), port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length]]
+      log("sleeping for #{sleep_time}ms before initing")
+      :timer.sleep(sleep_time)
       {:ok, response}
     end
 

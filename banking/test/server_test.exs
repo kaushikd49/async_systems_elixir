@@ -7,7 +7,7 @@ defmodule Banking.ServerTest do
          name: :BankOfAmerica,
          chain_length: 4,
          ip_addr: {"109.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
-         delay: 1,
+         delay: 10,
          port: 80
        ]
 
