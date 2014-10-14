@@ -11,8 +11,7 @@ defmodule Banking.ServerChain do
 
   def get_server(next, bank_conf, num_server) do
     conf = Keyword.put(bank_conf, :next, next)
-    conf = Keyword.put(bank_conf, :index, num_server-1)
-
+    conf = Keyword.put(conf, :index, num_server-1)
     {:ok, bank_server} = Banking.Server.start_link(conf)
     bank_server
   end

@@ -13,7 +13,7 @@ defmodule Banking.Main do
   end
  
   def  initialize_bank_and_get_head_tail(bank_conf) do
-
+     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
   end
 
   def get_conf(path) do
