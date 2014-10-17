@@ -12,6 +12,8 @@ use Mix.Config
      clients: [
          [
            [method: :get_balance, args: ["1.1.1", "asdasd"]],
+           [method: :deposit, args: ["1.1.1", "asdasd", 1500]],
+           [method: :withdraw, args: ["1.1.1", "asdasd", 1500]],
            [method: :get_balance, args: ["1.1.1", "asdasd"]]
          ]
 

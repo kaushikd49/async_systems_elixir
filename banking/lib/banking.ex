@@ -18,10 +18,15 @@ defmodule Banking.Main do
         conf = elem(confs, i)
         tup_conf = List.to_tuple(conf)
         sub_conf = elem(tup_conf, 0)
-        #        for j <- 0..(tuple_size(tup_conf)) do
-        #          sub_conf = elem(tup_conf, j)
-         IO.inspect "conf is #{inspect sub_conf}"
-         Banking.Client.perform([method: :get_balance, args: ["1.1.1", "asdasd"]], h1, t1)
+
+                for j <- 0..(tuple_size(tup_conf)-1) do
+                  sub_conf = elem(tup_conf, j)
+                  IO.inspect "conf is #{inspect sub_conf}"
+                  Banking.Client.perform(sub_conf, h1, t1)
+                end
+
+                #IO.inspect "conf is #{inspect sub_conf}"
+                #Banking.Client.perform([method: :get_balance, args: ["1.1.1", "asdasd"]], h1, t1)
          #end
       end
  
