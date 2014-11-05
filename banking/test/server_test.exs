@@ -36,19 +36,19 @@ defmodule Banking.ServerTest do
       withdraw_and_assert(bank_server, "1.3.2", "125", 1000, :InsufficientFunds, 0)
     end
   
-    def deposit_and_assert(bank_server, req_id, account_name, amount, outcome, balance) do
+    def deposit_and_assert(bank_server, req_id, account_name, amount, outcome, expected_balance) do
       resp = Banking.Server.deposit(bank_server, req_id, account_name, amount)
-      assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
+      assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
     end
   
-    def withdraw_and_assert(bank_server, req_id, account_name, amount, outcome, balance) do
+    def withdraw_and_assert(bank_server, req_id, account_name, amount, outcome, expected_balance) do
       resp = Banking.Server.withdraw(bank_server, req_id, account_name, amount)
-      assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
+      assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
      end
   
-   def get_bal_and_assert(bank_server, req_id, account_name, amount, outcome, balance) do
+   def get_bal_and_assert(bank_server, req_id, account_name, amount, outcome, expected_balance) do
       resp = Banking.Server.get_balance(bank_server, req_id, account_name)
-      assert [req_id: req_id, outcome: outcome, balance: balance, account_name: account_name] == resp
+      assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
    end
 
    #   test "async call" , %{bank_server: bank_server} do
