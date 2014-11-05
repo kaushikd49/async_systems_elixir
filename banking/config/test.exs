@@ -11,10 +11,10 @@ use Mix.Config
      config :general,
      clients: [
          [
-           [method: :get_balance, args: ["1.1.1", "asdasd"]],
-           [method: :deposit, args: ["1.1.1", "asdasd", 1500]],
-           [method: :withdraw, args: ["1.1.1", "asdasd", 1500]],
-           [method: :get_balance, args: ["1.1.1", "asdasd"]]
+           [method: :get_balance, args: ["1.1.1", "acct_name"]],
+           [method: :deposit, args: ["1.1.1", "acct_name", 1500]],
+           [method: :withdraw, args: ["1.1.1", "acct_name", 1500]],
+           [method: :get_balance, args: ["1.1.1", "acct_name"]]
          ]
 
       ], 

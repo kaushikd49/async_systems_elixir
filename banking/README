@@ -12,3 +12,5 @@ GetBalance
 Each test asserts above tasks are done properly and the balance reflects correctly.
 
 There is test for server, server_chain
+
+To run demo use mix run lib/banking.ex <path of config file>
