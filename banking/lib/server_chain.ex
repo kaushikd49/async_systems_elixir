@@ -16,12 +16,12 @@ defmodule Banking.ServerChain do
     bank_server
   end
 
-  def make_chain_and_get_head_and_tail(bank_conf) do
+  def make_chain_and_get(bank_conf) do
     servers = Banking.ServerChain.make_server_chain(bank_conf[:chain_length], nil, bank_conf)
     res = Utils.get_head_tail(servers)
     log "servers initialized are #{inspect servers}"
     log "head and tail servers are #{inspect res}"
-    res
+    [res, servers]
   end
 
   # Create new tail, pass it to the current tail.

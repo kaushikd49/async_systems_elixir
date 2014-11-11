@@ -2,9 +2,9 @@ defmodule Banking.ServerTest do
 
   use ExUnit.Case, async: true
   setup do
-     bank_conf = get_sample_conf()
-     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
-     {:ok, bank_server: head_server}
+       bank_conf = get_sample_conf()
+       [[head_server, tail_server], servers] = Banking.ServerChain.make_chain_and_get(bank_conf)
+       {:ok, bank_server: head_server}
   end
 
   def get_sample_conf() do
@@ -63,9 +63,12 @@ defmodule Banking.ServerTest do
 
   test "chain extension history check", %{bank_server: bank_server} do
     [chain, conf] = sample_chain_and_conf()
-    [chain, new_chain, new_tail_state] = do_chain_extension(chain, conf)
     [head, tail] = Utils.get_head_tail(chain)
     deposit_and_assert(head, "4.1.1", "123", 1000, :Processed, 1000)
+
+    [chain, new_chain, new_tail_state] = do_chain_extension(chain, conf)
+    [resp] = Dict.values(new_tail_state[:processed_trans])
+    get_bal_and_assert(head, "random_req", resp[:account_name], nil, resp[:outcome], resp[:balance])
   end
 
   def do_chain_extension(chain, conf) do
@@ -75,7 +78,7 @@ defmodule Banking.ServerTest do
 
   def sample_chain_and_conf() do
     conf = get_sample_conf()
-    chain = Banking.ServerChain.make_server_chain(conf[:chain_length], nil, conf)
+    [[h, t], chain] = Banking.ServerChain.make_chain_and_get(conf)
     [chain, conf]
   end
 end

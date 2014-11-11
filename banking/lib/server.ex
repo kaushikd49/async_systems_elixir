@@ -47,7 +47,7 @@ defmodule Banking.Server do
     end
 
     def handle_new_tail_update(arg, state) do
-      state = Keyword.put(state, :processes_trans, arg[:processes_trans])
+      state = Keyword.put(state, :processed_trans, arg[:processed_trans])
       state = Keyword.put(state, :accounts, arg[:accounts])
       log("after new tail's update #{inspect state}")
       [state, state]
@@ -61,7 +61,7 @@ defmodule Banking.Server do
       new_tail_state = GenServer.call(new_tail, new_tail_args) 
       # Update tail to point to new tail
       new_state = Keyword.put(state, :next, arg[:new_tail])
-      log("Peforming tail adjustment. Next server changing from #{inspect state[:next]} to #{inspect new_state[:next]}")
+      log("Peforming tail adjustment. Next server changing from #{inspect state[:next]} to #{inspect new_state[:next]}. New tail state: #{inspect new_tail_state}")
       [new_tail_state, new_state]
     end
 

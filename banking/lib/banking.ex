@@ -6,8 +6,6 @@ defmodule Banking.Main do
     # Banking.Client.perform(args, head_server, tail_server)
     head_tails = get_server_head_tails(conf)
     clients = get_clients_and_perform(conf, head_tails)
-
-    #[head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(3)
   end
 
    def get_clients_and_perform(conf, head_tails) do
@@ -41,7 +39,9 @@ defmodule Banking.Main do
       end
    end 
   def initialize_bank_and_get_head_tail(bank_conf) do
-     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
+     res = Banking.ServerChain.make_chain_and_get(bank_conf)
+     [head_tail, servers] = res
+     [head_server, tail_server] = head_tail
  end
 
   def get_conf(path) do
