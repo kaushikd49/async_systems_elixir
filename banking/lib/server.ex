@@ -22,8 +22,8 @@ defmodule Banking.Server do
     def init(opts) do
       accounts = Banking.CustomerAccounts.init()
       sleep_time = opts[:delay]
-      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], 
-        ip_addr: elem(opts[:ip_addr], opts[:index]), port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length]]
+      # todo: ip removed
+      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length]]
       log("created server with definition #{inspect response} sleeping for #{sleep_time}ms before initing")
       :timer.sleep(sleep_time)
       {:ok, response}
@@ -33,17 +33,36 @@ defmodule Banking.Server do
     def handle_call(arg, _from, state) do
       log("received call with arguments: #{inspect arg}")
       log("current state: #{inspect state}")
-      
       [response, new_state] = 
        cond do
-         arg[:chain_extension] != nil -> extend_chain(arg, state)
+         arg[:handle_adjust_tail] != nil -> handle_adjust_tail(arg, state)
+         arg[:new_tail_update] != nil -> handle_new_tail_update(arg, state)
          true -> perform_transaction(arg, state)
        end
       {:reply, response, new_state} 
     end
+   
+    def adjust_tail(server, arg) do
+      GenServer.call(server, Keyword.put(arg, :handle_adjust_tail, true))   
+    end
 
-    def extend_chain(arg, state) do
-      IO."muhahaha extending chain ***"
+    def handle_new_tail_update(arg, state) do
+      state = Keyword.put(state, :processes_trans, arg[:processes_trans])
+      state = Keyword.put(state, :accounts, arg[:accounts])
+      log("after new tail's update #{inspect state}")
+      [state, state]
+    end
+
+    def handle_adjust_tail(arg, state) do
+      new_tail_args = [accounts: state[:accounts], processed_trans: state[:processed_trans]]
+      [new_tail, new_tail_args] = [arg[:new_tail], Keyword.put(new_tail_args,:new_tail_update, true)]
+      IO.inspect "calling new tail #{inspect new_tail} with args #{inspect new_tail_args}"
+      # let the new tail update the hist obj and other info   
+      new_tail_state = GenServer.call(new_tail, new_tail_args) 
+      # Update tail to point to new tail
+      new_state = Keyword.put(state, :next, arg[:new_tail])
+      log("Peforming tail adjustment. Next server changing from #{inspect state[:next]} to #{inspect new_state[:next]}")
+      [new_tail_state, new_state]
     end
 
     def perform_transaction(arg, state) do

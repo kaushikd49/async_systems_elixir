@@ -2,6 +2,12 @@ defmodule Banking.ServerTest do
 
   use ExUnit.Case, async: true
   setup do
+     bank_conf = get_sample_conf()
+     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
+     {:ok, bank_server: head_server}
+  end
+
+  def get_sample_conf() do
     bank_conf =
       [
          name: :BankOfAmerica,
@@ -10,10 +16,8 @@ defmodule Banking.ServerTest do
          delay: 10,
          port: 80
        ]
-
-     [head_server, tail_server] = Banking.ServerChain.make_chain_and_get_head_and_tail(bank_conf)
-    {:ok, bank_server: head_server}
   end
+
 
     test "Deposit requests to server", %{bank_server: bank_server} do
       deposit_and_assert(bank_server, "1.1.1", "123", 1000, :Processed, 1000)
@@ -51,12 +55,27 @@ defmodule Banking.ServerTest do
       assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
    end
 
-  test "test ext", %{bank_server: bank_server} do
-    IO.inspect "running this"
+  test "chain extension size", %{bank_server: bank_server} do
+    [chain, conf] = sample_chain_and_conf()
+    [chain, new_chain, new_tail_state] = do_chain_extension(chain, conf)
+    assert Utils.sizeoflist(new_chain) == Utils.sizeoflist(chain) + 1 
   end
-   #   test "async call" , %{bank_server: bank_server} do
-   #    resp = Banking.Server.create(bank_server, self)
-   #    IO.inspect self
-   #   end
-   #
- end
+
+  test "chain extension history check", %{bank_server: bank_server} do
+    [chain, conf] = sample_chain_and_conf()
+    [chain, new_chain, new_tail_state] = do_chain_extension(chain, conf)
+    [head, tail] = Utils.get_head_tail(chain)
+    deposit_and_assert(head, "4.1.1", "123", 1000, :Processed, 1000)
+  end
+
+  def do_chain_extension(chain, conf) do
+    [new_chain, new_tail_state] = Banking.ServerChain.extend_chain(chain, conf)    
+    [chain, new_chain, new_tail_state]
+  end
+
+  def sample_chain_and_conf() do
+    conf = get_sample_conf()
+    chain = Banking.ServerChain.make_server_chain(conf[:chain_length], nil, conf)
+    [chain, conf]
+  end
+end

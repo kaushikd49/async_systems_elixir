@@ -18,11 +18,23 @@ defmodule Banking.ServerChain do
 
   def make_chain_and_get_head_and_tail(bank_conf) do
     servers = Banking.ServerChain.make_server_chain(bank_conf[:chain_length], nil, bank_conf)
-    server_tuple = List.to_tuple(servers)
-    log "servers initialized are #{inspect server_tuple}"
-    res = [elem(server_tuple, 0), elem(server_tuple, tuple_size(server_tuple) -1)]
+    res = Utils.get_head_tail(servers)
+    log "servers initialized are #{inspect servers}"
     log "head and tail servers are #{inspect res}"
     res
+  end
+
+  # Create new tail, pass it to the current tail.
+  # The current tail will copy over the relavant info
+  # to the new tail and update its own next to point
+  # to the new tail.
+  def extend_chain(bank_chain, new_tail_conf) do
+   chain_tuple = List.to_tuple(bank_chain)
+   conf = Keyword.put(new_tail_conf, :index, tuple_size(chain_tuple))
+   {:ok, new_tail} = Banking.Server.start_link(conf)
+   tail = Utils.last(chain_tuple) 
+   resp = Banking.Server.adjust_tail(tail, [new_tail: new_tail])
+   [(bank_chain ++ [new_tail]), resp]
   end
 
   def log(msg) do
