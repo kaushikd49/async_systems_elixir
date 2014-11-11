@@ -29,9 +29,24 @@ defmodule Banking.Server do
       {:ok, response}
     end
 
+
     def handle_call(arg, _from, state) do
       log("received call with arguments: #{inspect arg}")
       log("current state: #{inspect state}")
+      
+      [response, new_state] = 
+       cond do
+         arg[:chain_extension] != nil -> extend_chain(arg, state)
+         true -> perform_transaction(arg, state)
+       end
+      {:reply, response, new_state} 
+    end
+
+    def extend_chain(arg, state) do
+      IO."muhahaha extending chain ***"
+    end
+
+    def perform_transaction(arg, state) do
       server_side_req_id = get_server_side_req_id(arg[:req_id], arg[:account_name], arg[:type])
       processed_trans = state[:processed_trans][server_side_req_id] 
       [response, new_state] = 
@@ -52,8 +67,7 @@ defmodule Banking.Server do
         else
          log("tail sending response: #{inspect response}")
         end
-
-      {:reply, response, (new_state || state)} 
+       [response, (new_state || state)]
    end
 
     # Function that handles response construction and saves it too.
@@ -95,21 +109,4 @@ defmodule Banking.Server do
     def log(msg) do
       Utils.log("Server: #{inspect self} #{msg}")
     end
-
-    def cast_call(server, arg) do
-      log "makin cast call"
-      r = GenServer.cast(server, arg)
-    end
-
-    # todo : async move llike below
-    #def create(server, name) do
-    #GenServer.cast(server, name)
-    #end
-    #
-    #
-    #   def handle_cast(name, names) do
-    #    IO.puts "blahskdalda"
-    #    {:noreply, "asd"}
-    #  end
-
 end

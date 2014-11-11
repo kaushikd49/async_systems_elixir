@@ -51,6 +51,9 @@ defmodule Banking.ServerTest do
       assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
    end
 
+  test "test ext", %{bank_server: bank_server} do
+    IO.inspect "running this"
+  end
    #   test "async call" , %{bank_server: bank_server} do
    #    resp = Banking.Server.create(bank_server, self)
    #    IO.inspect self
