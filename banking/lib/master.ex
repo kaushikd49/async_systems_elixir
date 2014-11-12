@@ -18,8 +18,7 @@ defmodule Banking.Master do
     chains = opts[:chains]
     master = self()
     master_child = spawn_link(fn -> __MODULE__.loop(master) end) 
-    log("yen mage")
-    response = [chains: chains, master_child: master_child]
+    response = [chains: chains, master_child: master_child, uptime_dict: HashDict.new]
     {:ok, response}
    end
 
@@ -34,16 +33,13 @@ defmodule Banking.Master do
 
    # check uptimes for all servers
    def check_uptime(state) do
-    chains = state[:chains]
+    [chains, uptime_dict] = [state[:chains], state[:uptime_dict]]
     num = tuple_size(chains)
     chains = 
     for i <- 0..(num-1) do
       chain = elem(chains, i)
-      log("uptime check for the chain #{i}:#{inspect chain}")
       chain = List.to_tuple(chain)
-      chain = check_head_uptime(chain, elem(chain,0))
-      chain = check_tail_uptime(chain, elem(chain, tuple_size(chain)-1))
-      chain = chain_uptime_check(chain)
+      all_uptime_check(chain, i, uptime_dict)
       Tuple.to_list(chain)
     end
     new_state = Keyword.put(state, :chains, List.to_tuple(chains))
@@ -51,31 +47,38 @@ defmodule Banking.Master do
    end
 
 
-   def chain_uptime_check(chain) do
-    func = fn (chain_tup,i) -> check_if_server_up(chain_tup,i) end
-    iterate_and_modify(chain, 1, tuple_size(chain)-2, func)
+   def all_uptime_check(chain, i, uptime_dict) do
+     log("uptime check for the chain #{i}:#{inspect chain}")
+     chain = check_head_uptime(chain, elem(chain,0), uptime_dict)
+     chain = check_tail_uptime(chain, elem(chain, tuple_size(chain)-1), uptime_dict)
+     chain = chain_uptime_check(chain, uptime_dict)
    end
 
-   def iterate_and_modify(tuple, i, stop, func) when i <= stop do
-    new_tuple = func.(tuple,i)
-    iterate_and_modify(new_tuple, i+1, stop, func)
+   def chain_uptime_check(chain, uptime_dict) do
+    func = fn (chain_tup,i,uptime_dict) -> check_if_server_up(chain_tup,i,uptime_dict) end
+    iterate_and_modify(chain, 1, tuple_size(chain)-2, func, uptime_dict)
    end
 
-   def iterate_and_modify(tuple, i, stop, func) when i > stop do
+   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i <= stop do
+    new_tuple = func.(tuple,i,uptime_dict)
+    iterate_and_modify(new_tuple, i+1, stop, func, uptime_dict)
+   end
+
+   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i > stop do
     tuple
    end
 
-   def check_head_uptime(chain, head) do
+   def check_head_uptime(chain, head, uptime_dict) do
      log("head uptime check #{inspect head}")
      chain
    end
 
-   def check_tail_uptime(chain, tail) do
+   def check_tail_uptime(chain, tail, uptime_dict) do
      log("tail uptime check #{inspect tail}")
     chain
    end
 
-   def check_if_server_up(chain, i) do
+   def check_if_server_up(chain, i, uptime_dict) do
      log("intermediate server uptime check #{i}:#{inspect elem(chain,i)}")
     chain
    end
