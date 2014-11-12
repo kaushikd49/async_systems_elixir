@@ -1,4 +1,5 @@
 defmodule Banking.Server do
+  use Timex
     def start_link(opts \\ []) do
       GenServer.start_link(__MODULE__, opts)
     end
@@ -20,10 +21,12 @@ defmodule Banking.Server do
     end
 
     def init(opts) do
-      accounts = Banking.CustomerAccounts.init()
-      sleep_time = opts[:delay]
+      [sleep_time, accounts] = [opts[:delay], Banking.CustomerAccounts.init()]
+      server = self()
+      server_child = spawn_link(fn -> __MODULE__.loop(server) end) 
+
       # todo: ip removed
-      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length]]
+      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length], master: opts[:master]]
       log("created server with definition #{inspect response} sleeping for #{sleep_time}ms before initing")
       :timer.sleep(sleep_time)
       {:ok, response}
@@ -35,13 +38,28 @@ defmodule Banking.Server do
       log("current state: #{inspect state}")
       [response, new_state] = 
        cond do
+         arg[:send_hrtbeat] != nil -> send_hrtbeat(state)
          arg[:handle_adjust_tail] != nil -> handle_adjust_tail(arg, state)
          arg[:new_tail_update] != nil -> handle_new_tail_update(arg, state)
          true -> perform_transaction(arg, state)
        end
       {:reply, response, new_state} 
     end
-   
+  
+   def send_hrtbeat(state) do
+     resp =
+       cond do
+         state[:master] != nil ->
+           heartbeat = Time.now(:secs)
+           log("sending heartbeat:#{heartbeat} to master") 
+           resp = GenServer.call(state[:master], [heartbeat: heartbeat])
+           log("resp from beat was #{inspect resp}")
+           "sent_heartbeat"
+        true -> "didnt_send_hbeat"
+       end
+     [resp, state]
+   end
+
     def adjust_tail(server, arg) do
       GenServer.call(server, Keyword.put(arg, :handle_adjust_tail, true))   
     end
@@ -124,6 +142,13 @@ defmodule Banking.Server do
     def add_nested_hashdict(hash, key, nested_key, nested_val) do
       Keyword.put(hash, key, HashDict.put(hash[key], nested_key, nested_val))
     end
+
+   def loop(server) do
+    :timer.sleep(50) # todo: move to config
+    GenServer.call(server, [send_hrtbeat: true])
+    loop(server)
+   end
+
 
     def log(msg) do
       Utils.log("Server: #{inspect self} #{msg}")

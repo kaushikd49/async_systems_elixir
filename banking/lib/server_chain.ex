@@ -1,23 +1,24 @@
 defmodule Banking.ServerChain do
   
-  def make_server_chain(num_servers, next, bank_conf) when num_servers < 2 do
-    [get_server(next, bank_conf, num_servers)]
+  def make_server_chain(num_servers, next, bank_conf, master) when num_servers < 2 do
+    [get_server(next, bank_conf, num_servers, master)]
   end
 
-  def make_server_chain(num_servers, next, bank_conf) do
-    current_server = get_server(next, bank_conf, num_servers)
-    make_server_chain(num_servers - 1, current_server, bank_conf) ++ [current_server]
+  def make_server_chain(num_servers, next, bank_conf, master) do
+    current_server = get_server(next, bank_conf, num_servers, master)
+    make_server_chain(num_servers - 1, current_server, bank_conf, master) ++ [current_server]
   end
 
-  def get_server(next, bank_conf, num_server) do
+  def get_server(next, bank_conf, num_server, master) do
     conf = Keyword.put(bank_conf, :next, next)
     conf = Keyword.put(conf, :index, num_server-1)
+    conf = Keyword.put(conf, :master, master)
     {:ok, bank_server} = Banking.Server.start_link(conf)
     bank_server
   end
 
-  def make_chain_and_get(bank_conf) do
-    servers = Banking.ServerChain.make_server_chain(bank_conf[:chain_length], nil, bank_conf)
+  def make_chain_and_get(bank_conf, master) do
+    servers = Banking.ServerChain.make_server_chain(bank_conf[:chain_length], nil, bank_conf, master)
     res = Utils.get_head_tail(servers)
     log "servers initialized are #{inspect servers}"
     log "head and tail servers are #{inspect res}"

@@ -3,7 +3,7 @@ defmodule Banking.ServerTest do
   use ExUnit.Case, async: true
   setup do
        bank_conf = get_sample_conf()
-       [[head_server, tail_server], servers] = Banking.ServerChain.make_chain_and_get(bank_conf)
+       [[head_server, tail_server], servers] = Banking.ServerChain.make_chain_and_get(bank_conf, nil)
        {:ok, bank_server: head_server}
   end
 
@@ -78,7 +78,7 @@ defmodule Banking.ServerTest do
 
   def sample_chain_and_conf() do
     conf = get_sample_conf()
-    [[h, t], chain] = Banking.ServerChain.make_chain_and_get(conf)
+    [[h, t], chain] = Banking.ServerChain.make_chain_and_get(conf, nil)
     [chain, conf]
   end
 end

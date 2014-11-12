@@ -11,7 +11,7 @@ defmodule Banking.ServerChainTest do
            delay: 1,
            port: 80
          ]
-    res = Banking.ServerChain.make_server_chain(num_servers, nil, bank_conf)
+    res = Banking.ServerChain.make_server_chain(num_servers, nil, bank_conf, nil)
     t = List.to_tuple(res)
     assert num_servers == tuple_size(t)
   end

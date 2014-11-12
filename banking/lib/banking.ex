@@ -39,7 +39,7 @@ defmodule Banking.Main do
       end
    end 
   def initialize_bank_and_get_head_tail(bank_conf) do
-     res = Banking.ServerChain.make_chain_and_get(bank_conf)
+     res = Banking.ServerChain.make_chain_and_get(bank_conf, nil) # todo fix this
      [head_tail, servers] = res
      [head_server, tail_server] = head_tail
  end

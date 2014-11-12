@@ -16,8 +16,8 @@ defmodule Banking.Master do
    # child process for initiating server uptime check
 
    def init(opts) do
-    chains = opts[:chains]
     master = self()
+    chains = get_chains(master)
     master_child = spawn_link(fn -> __MODULE__.loop(master) end) 
     response = [chains: chains, master_child: master_child, uptime_dict: HashDict.new]
     {:ok, response}
@@ -27,9 +27,20 @@ defmodule Banking.Master do
     [response, new_state] =
       cond do
         arg[:check_uptime] -> check_uptime(state) 
+        arg[:heartbeat] -> recv_heartbeat(arg, state, _from)
         true -> ["done", state]
       end
     {:reply, response, new_state} 
+   end
+
+   def recv_heartbeat(arg, state, from) do
+    from = elem(from, 0)
+    log("receiving hrtbeat")
+    [dict, hrtbeat] = [state[:uptime_dict], arg[:heartbeat]]
+    dict = HashDict.put(dict, from, hrtbeat)
+    new_state = Keyword.put(state, :uptime_dict, dict)
+    log("updated heartbeat from server:#{inspect from} to #{inspect hrtbeat}")
+    ["heartbeat_recvd", new_state]
    end
 
    # check uptimes for all servers
@@ -65,9 +76,7 @@ defmodule Banking.Master do
     iterate_and_modify(new_tuple, i+1, stop, func, uptime_dict)
    end
 
-   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i > stop do
-    tuple
-   end
+   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i > stop do; tuple ;end
 
    def is_dead?(server, uptime_dict, server_type) do
     uptime = uptime_dict[server] 
@@ -99,6 +108,25 @@ defmodule Banking.Master do
     GenServer.call(server, [check_uptime: true])
     loop(server)
    end
+
+  def get_conf do
+    use Mix.Config
+    path = Path.expand("test.exs", "./config")
+    IO.puts "loading configuration #{path}"
+    Mix.Config.import_config(path)
+    conf = Mix.Config.read!(path)
+  end
+
+  def get_chains(master) do
+    all_conf = get_conf()[:general]
+    chains_conf = all_conf[:servers]
+    chains =
+    for chain_conf <- Tuple.to_list(chains_conf) do
+      [[h,t], chain] = Banking.ServerChain.make_chain_and_get(chain_conf, master)
+      chain
+    end
+    chains = List.to_tuple(chains)
+  end
 
    def log(msg) do
      Utils.log("Master: #{msg}")
