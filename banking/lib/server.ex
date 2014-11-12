@@ -21,7 +21,6 @@ defmodule Banking.Server do
     end
 
     def init(opts) do
-      IO.inspect opts
       ip = elem(opts[:ip_addr], opts[:index])
       [sleep_time, accounts] = [opts[:delay], Banking.CustomerAccounts.init()]
       server = self()
