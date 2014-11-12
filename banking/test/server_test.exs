@@ -72,6 +72,8 @@ defmodule Banking.ServerTest do
   end
 
   def do_chain_extension(chain, conf) do
+    ip_addr = List.to_tuple(Tuple.to_list(conf[:ip_addr]) ++ ["new.ip"])
+    conf = Keyword.put(conf, :ip_addr, ip_addr)
     [new_chain, new_tail_state] = Banking.ServerChain.extend_chain(chain, conf)    
     [chain, new_chain, new_tail_state]
   end

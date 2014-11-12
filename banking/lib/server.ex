@@ -21,12 +21,14 @@ defmodule Banking.Server do
     end
 
     def init(opts) do
+      IO.inspect opts
+      ip = elem(opts[:ip_addr], opts[:index])
       [sleep_time, accounts] = [opts[:delay], Banking.CustomerAccounts.init()]
       server = self()
       server_child = spawn_link(fn -> __MODULE__.loop(server) end) 
 
       # todo: ip removed
-      response = [next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length], master: opts[:master]]
+      response = [ip: ip, next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length], master: opts[:master]]
       log("created server with definition #{inspect response} sleeping for #{sleep_time}ms before initing")
       :timer.sleep(sleep_time)
       {:ok, response}
