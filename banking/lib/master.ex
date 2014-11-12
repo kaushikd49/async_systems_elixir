@@ -1,5 +1,6 @@
 # Needs to keep track of clients, banking server chains
 defmodule Banking.Master do
+  use Timex
 
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, opts)
@@ -68,18 +69,27 @@ defmodule Banking.Master do
     tuple
    end
 
+   def is_dead?(server, uptime_dict, server_type) do
+    uptime = uptime_dict[server] 
+    is_dead = !uptime or Time.now(:secs) - uptime > 5 # todo move this to config
+    log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead}")
+    is_dead
+   end
+
    def check_head_uptime(chain, head, uptime_dict) do
-     log("head uptime check #{inspect head}")
+     is_dead = is_dead?(head, uptime_dict, "head")
+     
      chain
    end
 
    def check_tail_uptime(chain, tail, uptime_dict) do
-     log("tail uptime check #{inspect tail}")
+     is_dead = is_dead?(tail, uptime_dict, "tail")
     chain
    end
 
    def check_if_server_up(chain, i, uptime_dict) do
-     log("intermediate server uptime check #{i}:#{inspect elem(chain,i)}")
+     server = elem(chain,i)
+     is_dead = is_dead?(server, uptime_dict, "intermediate")
     chain
    end
 
