@@ -31,7 +31,7 @@ defmodule Banking.Main do
    end
 
    def get_server_head_tails(conf) do
-      server_confs = List.to_tuple(conf[:servers])
+      server_confs = (conf[:servers])
       server_head_tails = 
       for i <- 0..(tuple_size(server_confs)-1) do
         bank_conf = elem(server_confs, i)

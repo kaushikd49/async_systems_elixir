@@ -28,6 +28,7 @@ defmodule Banking.ServerChain do
   # The current tail will copy over the relavant info
   # to the new tail and update its own next to point
   # to the new tail.
+
   def extend_chain(bank_chain, new_tail_conf) do
    chain_tuple = List.to_tuple(bank_chain)
    conf = Keyword.put(new_tail_conf, :index, tuple_size(chain_tuple))

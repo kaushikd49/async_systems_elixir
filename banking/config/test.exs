@@ -18,7 +18,7 @@ use Mix.Config
          ]
 
       ], 
-     servers: [
+     servers: {
        [
          name: :FederalBank,
          chain_length: 4,
@@ -47,4 +47,4 @@ use Mix.Config
          delay: 1,
          port: 80
        ],
-   ]
+   }
