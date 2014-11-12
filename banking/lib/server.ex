@@ -39,6 +39,7 @@ defmodule Banking.Server do
 
 
     def handle_call(arg, _from, state) do
+      receipt_termination(state)
       log("received call with arguments: #{inspect arg}")
       log("current state: #{inspect state}")
       [response, new_state] = 
@@ -48,9 +49,26 @@ defmodule Banking.Server do
          arg[:new_tail_update] != nil -> handle_new_tail_update(arg, state)
          true -> perform_transaction(arg, state)
        end
+       sent_termination(state)
       {:reply, response, new_state} 
     end
-  
+ 
+   def receipt_termination(state) do
+    try_termination(state, :recv, :recvd)
+   end
+
+   def try_termination(state, type, counter_type) do
+    state = Keyword.put(state, type, state[counter_type]+1) 
+    if (state[:death_type] == type && state[type] >= state[:death_val]) do
+      log("killing process #{inspect self}")
+      Process.exit(self(), :kill)
+    end
+    state
+   end
+
+   def sent_termination(state) do
+    try_termination(state, :send, :sent)
+   end  
    def send_hrtbeat(state) do
      resp =
        cond do
