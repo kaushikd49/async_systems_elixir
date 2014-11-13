@@ -4,6 +4,7 @@ The project is in Elixir. It needs Elixar to be installed. -> http://elixir-lang
 2. To demo, run mix run <current_path>/config/test.exs
 
 All tests are in the test/ directory and cover for various scenarious
+To run tests - run: mix test from the project root
 chain extension
 failure detection
 failure handling - head, tail, intermediate servers

@@ -14,19 +14,18 @@ Each test asserts above tasks are done properly and the balance reflects correct
 There is test for server, server_chain
 
 To run demo use mix run lib/banking.ex <path of config file>
-
-
+----------------------------------------------------------------------------------------
 Comparison of languages
-
+----------------------------------------------------------------------------------------
 DistAlgo
+
 Number of lines of code is around 680.
 Time and implementing Phase 2 was 6 days and Phase 3 was 7 days.
 
 
 ----------------------------------------------------------------------------------------
-
-
 Elixir
+
 Number of lines of code is around 700.
 Time and implementing Phase 2 was 7 days and Phase 3 was 8 days.
 
