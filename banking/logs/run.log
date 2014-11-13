@@ -1,32 +1,165 @@
 false
 loading configuration /Users/kaushik/ms/code/async_github/async_systems_elixir/banking/config/test.exs
-2014-10-13 23:58:53.993 [info] Server: #PID<0.77.0> created server with definition [next: nil, accounts: #PID<0.78.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:53.998 [info] Server: #PID<0.79.0> created server with definition [next: #PID<0.77.0>, accounts: #PID<0.80.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.000 [info] Server: #PID<0.81.0> created server with definition [next: #PID<0.79.0>, accounts: #PID<0.82.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.002 [info] Server: #PID<0.83.0> created server with definition [next: #PID<0.81.0>, accounts: #PID<0.84.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.005 [info] BankingServerChain: servers initialized are {#PID<0.83.0>, #PID<0.81.0>, #PID<0.79.0>, #PID<0.77.0>}
-2014-10-13 23:58:54.005 [info] BankingServerChain: head and tail servers are [#PID<0.83.0>, #PID<0.77.0>]
-2014-10-13 23:58:54.005 [info] Server: #PID<0.85.0> created server with definition [next: nil, accounts: #PID<0.86.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.007 [info] Server: #PID<0.87.0> created server with definition [next: #PID<0.85.0>, accounts: #PID<0.88.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.009 [info] Server: #PID<0.89.0> created server with definition [next: #PID<0.87.0>, accounts: #PID<0.90.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.011 [info] Server: #PID<0.91.0> created server with definition [next: #PID<0.89.0>, accounts: #PID<0.92.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, ip_addr: "109.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.013 [info] BankingServerChain: servers initialized are {#PID<0.91.0>, #PID<0.89.0>, #PID<0.87.0>, #PID<0.85.0>}
-2014-10-13 23:58:54.013 [info] BankingServerChain: head and tail servers are [#PID<0.91.0>, #PID<0.85.0>]
-2014-10-13 23:58:54.013 [info] Server: #PID<0.93.0> created server with definition [next: nil, accounts: #PID<0.94.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.015 [info] Server: #PID<0.95.0> created server with definition [next: #PID<0.93.0>, accounts: #PID<0.96.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.017 [info] Server: #PID<0.97.0> created server with definition [next: #PID<0.95.0>, accounts: #PID<0.98.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.019 [info] Server: #PID<0.99.0> created server with definition [next: #PID<0.97.0>, accounts: #PID<0.100.0>, processed_trans: #HashDict<[]>, name: :CitiBank, ip_addr: "110.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.021 [info] BankingServerChain: servers initialized are {#PID<0.99.0>, #PID<0.97.0>, #PID<0.95.0>, #PID<0.93.0>}
-2014-10-13 23:58:54.021 [info] BankingServerChain: head and tail servers are [#PID<0.99.0>, #PID<0.93.0>]
-2014-10-13 23:58:54.021 [info] Server: #PID<0.101.0> created server with definition [next: nil, accounts: #PID<0.102.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.4", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.023 [info] Server: #PID<0.103.0> created server with definition [next: #PID<0.101.0>, accounts: #PID<0.104.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.3", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.025 [info] Server: #PID<0.105.0> created server with definition [next: #PID<0.103.0>, accounts: #PID<0.106.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "108.120.12.2", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.027 [info] Server: #PID<0.107.0> created server with definition [next: #PID<0.105.0>, accounts: #PID<0.108.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, ip_addr: "111.120.12.1", port: 80, delay: 1, chain_length: 4] sleeping for 1ms before initing
-2014-10-13 23:58:54.029 [info] BankingServerChain: servers initialized are {#PID<0.107.0>, #PID<0.105.0>, #PID<0.103.0>, #PID<0.101.0>}
-2014-10-13 23:58:54.029 [info] BankingServerChain: head and tail servers are [#PID<0.107.0>, #PID<0.101.0>]
-"conf is [method: :get_balance, args: [\"1.1.1\", \"asdasd\"]]"
-2014-10-13 23:58:54.029 [info] Server: #PID<0.83.0> received call with arguments: [req_id: "1.1.1", type: :get_balance, account_name: "asdasd"]
-2014-10-13 23:58:54.029 [info] Server: #PID<0.83.0> current state: [next: #PID<0.81.0>, accounts: #PID<0.84.0>, processed_trans: #HashDict<[]>, name: :FederalBank, ip_addr: "108.120.12.1", port: 80, delay: 1, chain_length: 4]
+2014-11-12 21:24:50.031 [info] Server: #PID<0.104.0> created server with definition [ip: "108.120.12.4", next: nil, accounts: #PID<0.106.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 17, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.033 [info] Server: #PID<0.107.0> created server with definition [ip: "108.120.12.3", next: #PID<0.104.0>, accounts: #PID<0.109.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 93, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.035 [info] Server: #PID<0.110.0> created server with definition [ip: "108.120.12.2", next: #PID<0.107.0>, accounts: #PID<0.112.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 3, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.037 [info] Server: #PID<0.113.0> created server with definition [ip: "108.120.12.1", next: #PID<0.110.0>, accounts: #PID<0.115.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 15, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.039 [info] BankingServerChain: servers initialized are [#PID<0.113.0>, #PID<0.110.0>, #PID<0.107.0>, #PID<0.104.0>]
+2014-11-12 21:24:50.039 [info] BankingServerChain: head and tail servers are [#PID<0.113.0>, #PID<0.104.0>]
+2014-11-12 21:24:50.039 [info] Server: #PID<0.116.0> created server with definition [ip: "108.120.12.4", next: nil, accounts: #PID<0.118.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 94, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.041 [info] Server: #PID<0.119.0> created server with definition [ip: "108.120.12.3", next: #PID<0.116.0>, accounts: #PID<0.121.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 84, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.043 [info] Server: #PID<0.122.0> created server with definition [ip: "108.120.12.2", next: #PID<0.119.0>, accounts: #PID<0.124.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 83, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.045 [info] Server: #PID<0.125.0> created server with definition [ip: "109.120.12.1", next: #PID<0.122.0>, accounts: #PID<0.127.0>, processed_trans: #HashDict<[]>, name: :BankOfAmerica, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 78, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.047 [info] BankingServerChain: servers initialized are [#PID<0.125.0>, #PID<0.122.0>, #PID<0.119.0>, #PID<0.116.0>]
+2014-11-12 21:24:50.047 [info] BankingServerChain: head and tail servers are [#PID<0.125.0>, #PID<0.116.0>]
+2014-11-12 21:24:50.047 [info] Server: #PID<0.128.0> created server with definition [ip: "108.120.12.4", next: nil, accounts: #PID<0.130.0>, processed_trans: #HashDict<[]>, name: :CitiBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 5, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.049 [info] Server: #PID<0.131.0> created server with definition [ip: "108.120.12.3", next: #PID<0.128.0>, accounts: #PID<0.133.0>, processed_trans: #HashDict<[]>, name: :CitiBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 98, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.051 [info] Server: #PID<0.134.0> created server with definition [ip: "108.120.12.2", next: #PID<0.131.0>, accounts: #PID<0.136.0>, processed_trans: #HashDict<[]>, name: :CitiBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 84, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.053 [info] Server: #PID<0.137.0> created server with definition [ip: "110.120.12.1", next: #PID<0.134.0>, accounts: #PID<0.139.0>, processed_trans: #HashDict<[]>, name: :CitiBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 24, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.055 [info] BankingServerChain: servers initialized are [#PID<0.137.0>, #PID<0.134.0>, #PID<0.131.0>, #PID<0.128.0>]
+2014-11-12 21:24:50.055 [info] BankingServerChain: head and tail servers are [#PID<0.137.0>, #PID<0.128.0>]
+2014-11-12 21:24:50.055 [info] Server: #PID<0.140.0> created server with definition [ip: "108.120.12.4", next: nil, accounts: #PID<0.142.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 56, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.057 [info] Server: #PID<0.143.0> created server with definition [ip: "108.120.12.3", next: #PID<0.140.0>, accounts: #PID<0.145.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 47, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.059 [info] Server: #PID<0.146.0> created server with definition [ip: "108.120.12.2", next: #PID<0.143.0>, accounts: #PID<0.148.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 49, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.061 [info] Server: #PID<0.149.0> created server with definition [ip: "111.120.12.1", next: #PID<0.146.0>, accounts: #PID<0.151.0>, processed_trans: #HashDict<[]>, name: :HSBCBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 61, sent: 0, recvd: 0] sleeping for 1ms before initing
+2014-11-12 21:24:50.063 [info] BankingServerChain: servers initialized are [#PID<0.149.0>, #PID<0.146.0>, #PID<0.143.0>, #PID<0.140.0>]
+2014-11-12 21:24:50.063 [info] BankingServerChain: head and tail servers are [#PID<0.149.0>, #PID<0.140.0>]
+"conf is [method: :get_balance, args: [\"1.1.1\", \"acct_name\"]]"
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> received call with arguments: [req_id: "1.1.1", type: :get_balance, account_name: "acct_name"]
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> current state: [ip: "108.120.12.1", next: #PID<0.110.0>, accounts: #PID<0.115.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 15, sent: 0, recvd: 0]
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 0
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 0
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> incrementing conter to 1
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.063 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 0
 outcome is Processed
-2014-10-13 23:58:54.031 [info] Server: #PID<0.83.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "asdasd"]
-2014-10-13 23:58:54.031 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "asdasd"] from [#PID<0.77.0>]
+2014-11-12 21:24:50.064 [info] Server: #PID<0.113.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]
+2014-11-12 21:24:50.064 [info] Server: #PID<0.113.0> incrementing conter to 1
+2014-11-12 21:24:50.064 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.064 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.064 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"] from [#PID<0.104.0>]
+"conf is [method: :deposit, args: [\"1.1.1\", \"acct_name\", 1500]]"
+2014-11-12 21:24:50.064 [info] Server: #PID<0.113.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> current state: [sent: 1, processed_trans: #HashDict<[{"1.1.1_acct_name_get_balance", [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]}]>, recvd: 1, ip: "108.120.12.1", next: #PID<0.110.0>, accounts: #PID<0.115.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 15]
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> incrementing conter to 2
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 1
+2014-11-12 21:24:50.066 [info] Balance for account acct_name after deposit is 1500
+outcome is Processed
+2014-11-12 21:24:50.066 [info] Server: #PID<0.113.0> passing update to next server #PID<0.110.0>
+2014-11-12 21:24:50.066 [info] Server: #PID<0.110.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> current state: [ip: "108.120.12.2", next: #PID<0.107.0>, accounts: #PID<0.112.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 3, sent: 0, recvd: 0]
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 0
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 0
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> incrementing conter to 1
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 0
+2014-11-12 21:24:50.067 [info] Balance for account acct_name after deposit is 1500
+outcome is Processed
+2014-11-12 21:24:50.067 [info] Server: #PID<0.110.0> passing update to next server #PID<0.107.0>
+2014-11-12 21:24:50.067 [info] Server: #PID<0.107.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> current state: [ip: "108.120.12.3", next: #PID<0.104.0>, accounts: #PID<0.109.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 93, sent: 0, recvd: 0]
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 0
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 0
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> incrementing conter to 1
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 0
+2014-11-12 21:24:50.068 [info] Balance for account acct_name after deposit is 1500
+outcome is Processed
+2014-11-12 21:24:50.068 [info] Server: #PID<0.107.0> passing update to next server #PID<0.104.0>
+2014-11-12 21:24:50.068 [info] Server: #PID<0.104.0> received call with arguments: [req_id: "1.1.1", type: :deposit, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> current state: [ip: "108.120.12.4", next: nil, accounts: #PID<0.106.0>, processed_trans: #HashDict<[]>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 17, sent: 0, recvd: 0]
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 0
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 0
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> incrementing conter to 1
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 0
+2014-11-12 21:24:50.069 [info] Balance for account acct_name after deposit is 1500
+outcome is Processed
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> incrementing conter to 1
+2014-11-12 21:24:50.069 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.107.0> incrementing conter to 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.110.0> incrementing conter to 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.070 [info] Server: #PID<0.113.0> incrementing conter to 2
+2014-11-12 21:24:50.070 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.070 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.070 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"] from [#PID<0.104.0>]
+"conf is [method: :withdraw, args: [\"1.1.1\", \"acct_name\", 1500]]"
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> received call with arguments: [req_id: "1.1.1", type: :withdraw, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> current state: [sent: 2, processed_trans: #HashDict<[{"1.1.1_acct_name_get_balance", [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]}, {"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}]>, recvd: 2, ip: "108.120.12.1", next: #PID<0.110.0>, accounts: #PID<0.115.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 15]
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> incrementing conter to 3
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.071 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 2
+2014-11-12 21:24:50.071 [info] Balance for account acct_name after withdrawal is 0
+outcome is Processed
+2014-11-12 21:24:50.072 [info] Server: #PID<0.113.0> passing update to next server #PID<0.110.0>
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> received call with arguments: [req_id: "1.1.1", type: :withdraw, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> current state: [sent: 1, processed_trans: #HashDict<[{"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}]>, recvd: 1, ip: "108.120.12.2", next: #PID<0.107.0>, accounts: #PID<0.112.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :recv, death_val: 3]
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> incrementing conter to 2
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 2
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 1
+2014-11-12 21:24:50.072 [info] Balance for account acct_name after withdrawal is 0
+outcome is Processed
+2014-11-12 21:24:50.072 [info] Server: #PID<0.110.0> passing update to next server #PID<0.107.0>
+2014-11-12 21:24:50.073 [info] Server: #PID<0.104.0> received call with arguments: [send_hrtbeat: true]
+2014-11-12 21:24:50.073 [info] Server: #PID<0.107.0> received call with arguments: [req_id: "1.1.1", type: :withdraw, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.073 [info] Server: #PID<0.104.0> current state: [sent: 1, processed_trans: #HashDict<[{"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}]>, recvd: 1, ip: "108.120.12.4", next: nil, accounts: #PID<0.106.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 17]
+2014-11-12 21:24:50.073 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.073 [info] Server: #PID<0.107.0> current state: [sent: 1, processed_trans: #HashDict<[{"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}]>, recvd: 1, ip: "108.120.12.3", next: #PID<0.104.0>, accounts: #PID<0.109.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :unbounded, death_val: 93]
+2014-11-12 21:24:50.073 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.073 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.074 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.074 [info] Server: #PID<0.107.0> incrementing conter to 2
+2014-11-12 21:24:50.074 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 2
+2014-11-12 21:24:50.074 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 1
+2014-11-12 21:24:50.074 [info] Balance for account acct_name after withdrawal is 0
+outcome is Processed
+2014-11-12 21:24:50.074 [info] Server: #PID<0.107.0> passing update to next server #PID<0.104.0>
+2014-11-12 21:24:50.074 [info] Server: #PID<0.104.0> received call with arguments: [req_id: "1.1.1", type: :withdraw, account_name: "acct_name", amount: 1500]
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> current state: [sent: 1, processed_trans: #HashDict<[{"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}]>, recvd: 1, ip: "108.120.12.4", next: nil, accounts: #PID<0.106.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 17]
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> incrementing conter to 2
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 2
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 1
+2014-11-12 21:24:50.075 [info] Balance for account acct_name after withdrawal is 0
+outcome is Processed
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]
+2014-11-12 21:24:50.075 [info] Server: #PID<0.104.0> incrementing conter to 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.104.0> Process #PID<0.104.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.107.0> incrementing conter to 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.107.0> Process #PID<0.107.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.110.0> incrementing conter to 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.110.0> Process #PID<0.110.0> dead as count is 2
+2014-11-12 21:24:50.076 [info] Server: #PID<0.113.0> incrementing conter to 3
+2014-11-12 21:24:50.076 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.076 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.077 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"] from [#PID<0.104.0>]
+"conf is [method: :get_balance, args: [\"1.1.1\", \"acct_name\"]]"
+2014-11-12 21:24:50.077 [info] Server: #PID<0.113.0> received call with arguments: [req_id: "1.1.1", type: :get_balance, account_name: "acct_name"]
+2014-11-12 21:24:50.077 [info] Server: #PID<0.113.0> current state: [sent: 3, processed_trans: #HashDict<[{"1.1.1_acct_name_get_balance", [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]}, {"1.1.1_acct_name_deposit", [req_id: "1.1.1", outcome: :Processed, balance: 1500, account_name: "acct_name"]}, {"1.1.1_acct_name_withdraw", [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]}]>, recvd: 3, ip: "108.120.12.1", next: #PID<0.110.0>, accounts: #PID<0.115.0>, name: :FederalBank, port: 80, delay: 1, chain_length: 4, master: nil, death_type: :send, death_val: 15]
+2014-11-12 21:24:50.077 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.077 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> incrementing conter to 4
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 4
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 3
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> tail sending response: [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"]
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> incrementing conter to 4
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 4
+2014-11-12 21:24:50.078 [info] Server: #PID<0.113.0> Process #PID<0.113.0> dead as count is 4
+2014-11-12 21:24:50.078 [info] client got result [req_id: "1.1.1", outcome: :Processed, balance: 0, account_name: "acct_name"] from [#PID<0.104.0>]

@@ -1,7 +1,7 @@
 defmodule Banking.Server do
   use Timex
     def start_link(opts \\ []) do
-      GenServer.start_link(__MODULE__, opts)
+      GenServer.start(__MODULE__, opts)
     end
 
     def make_transaction(server, arg) do
@@ -39,36 +39,47 @@ defmodule Banking.Server do
 
 
     def handle_call(arg, _from, state) do
-      receipt_termination(state)
       log("received call with arguments: #{inspect arg}")
       log("current state: #{inspect state}")
       [response, new_state] = 
        cond do
+         is_dead?(state) -> ["dead", state]
          arg[:send_hrtbeat] != nil -> send_hrtbeat(state)
          arg[:handle_adjust_tail] != nil -> handle_adjust_tail(arg, state)
          arg[:new_tail_update] != nil -> handle_new_tail_update(arg, state)
          true -> perform_transaction(arg, state)
        end
-       sent_termination(state)
       {:reply, response, new_state} 
     end
  
    def receipt_termination(state) do
-    try_termination(state, :recv, :recvd)
+    increment_op(state, :recv, :recvd)
    end
 
-   def try_termination(state, type, counter_type) do
-    state = Keyword.put(state, type, state[counter_type]+1) 
-    if (state[:death_type] == type && state[type] >= state[:death_val]) do
-      log("killing process #{inspect self}")
-      Process.exit(self(), :kill)
+   def sent_termination(state) do
+    increment_op(state, :send, :sent)
+   end 
+
+   def is_dead?(state) do
+    dead_state?(state, :recv, :recvd) or dead_state?(state, :send, :sent)
+   end
+
+   def increment_op(state, type, counter_type) do
+    state = Keyword.put(state, counter_type, state[counter_type]+1) 
+    log("incrementing conter to #{inspect state[counter_type]}")
+    if(is_dead?(state)) do
+      log("process is now killed as count is #{state[counter_type]}")
     end
     state
    end
 
-   def sent_termination(state) do
-    try_termination(state, :send, :sent)
-   end  
+   def dead_state?(state, type, counter_type) do
+    res = (state[:death_type] == type and state[counter_type] >= state[:death_val]) 
+    log("Process #{inspect self} dead as count is #{state[counter_type]}")
+    res
+   end
+
+
    def send_hrtbeat(state) do
      resp =
        cond do
@@ -76,7 +87,7 @@ defmodule Banking.Server do
            heartbeat = Time.now(:secs)
            log("sending heartbeat:#{heartbeat} to master") 
            resp = GenServer.call(state[:master], [heartbeat: heartbeat])
-           log("resp from beat was #{inspect resp}")
+           log("resp from master after sending heartbeat was #{inspect resp}")
            "sent_heartbeat"
         true -> "didnt_send_hbeat"
        end
@@ -107,6 +118,7 @@ defmodule Banking.Server do
     end
 
     def perform_transaction(arg, state) do
+      state = receipt_termination(state)
       server_side_req_id = get_server_side_req_id(arg[:req_id], arg[:account_name], arg[:type])
       processed_trans = state[:processed_trans][server_side_req_id] 
       [response, new_state] = 
@@ -127,7 +139,8 @@ defmodule Banking.Server do
         else
          log("tail sending response: #{inspect response}")
         end
-       [response, (new_state || state)]
+       new2_state = sent_termination((new_state || state))
+       [response, new2_state]
    end
 
     # Function that handles response construction and saves it too.

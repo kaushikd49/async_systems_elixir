@@ -26,6 +26,7 @@ defmodule Banking.Master do
    def handle_call(arg, _from, state) do
     [response, new_state] =
       cond do
+        arg[:get_chains] -> [state[:chains], state]
         arg[:check_uptime] -> check_uptime(state) 
         arg[:heartbeat] -> recv_heartbeat(arg, state, _from)
         true -> ["done", state]
@@ -92,7 +93,7 @@ defmodule Banking.Master do
    end
 
    def check_tail_uptime(chain, tail, uptime_dict) do
-     is_dead = is_dead?(tail, uptime_dict, "tail")
+    is_dead = is_dead?(tail, uptime_dict, "tail")
     chain
    end
 

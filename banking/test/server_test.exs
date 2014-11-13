@@ -1,6 +1,6 @@
 defmodule Banking.ServerTest do
 
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
   setup do
        bank_conf = get_sample_conf()
        [[head_server, tail_server], servers] = Banking.ServerChain.make_chain_and_get(bank_conf, nil)

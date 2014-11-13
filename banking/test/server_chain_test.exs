@@ -1,5 +1,5 @@
 defmodule Banking.ServerChainTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   test "server chain" do
     num_servers = 4
