@@ -3,5 +3,11 @@ The project is in Elixir. It needs Elixar to be installed. -> http://elixir-lang
 1. Once done, unpack the project contents and go to banking dir.
 2. To demo, run mix run <current_path>/config/test.exs
 
-BUGS - ip addresses are getting duplicated
+All tests are in the test/ directory and cover for various scenarious
+chain extension
+failure detection
+failure handling - head, tail, intermediate servers
 client configs needs to be used to call client performs.
+
+UPDATE
+IP assignment bug is removed this Phase 3
