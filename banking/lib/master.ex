@@ -100,7 +100,15 @@ defmodule Banking.Master do
 
    def check_tail_uptime(chain, tail, uptime_dict) do
     is_dead = is_dead?(tail, uptime_dict, "tail")
-    chain
+     if is_dead do
+       tail = elem(chain, tuple_size(chain)-1)
+       log("deleted dead tail #{inspect tail}")
+       new_chain = List.to_tuple(
+        for i <- 0..tuple_size(chain)-2 do
+          elem(chain,i)
+        end) 
+     end
+     chain
    end
 
    def check_if_server_up(chain, i, uptime_dict) do
