@@ -22,6 +22,24 @@ DistAlgo
 Number of lines of code is around 680.
 Time and implementing Phase 2 was 6 days and Phase 3 was 7 days.
 
+**Pros**
+
+Once understood , its easy to code in it.
+Process creation is not needed.
+Message passing is very simple.
+
+**Cons**
+
+The documentation of the language can be a lot better.
+The run-time error shown is not proper. Its very difficult to debug issues if a run-time error occurs.
+
+The object created is a class 'set'. Once the object is created , I cannot use Self keyword in it. Moreover i cannot even call methods on it
+As an example i do this 
+obj =  new(BankServer,num=1)
+now i cant do obj.setTimeout(100)
+obj is class 'set' and nothing can be done in it. There has to be a better representation of obj.
+
+Need a debugger for this tool , specially since it is asynchronous , debugger is required even more.
 
 ----------------------------------------------------------------------------------------
 Elixir
@@ -33,13 +51,14 @@ Elixir is a completely functional language for building distributed fault tolera
 
 At a high level, the code is similar to the pseudocode and the language is quite expressive.
 
-**Cons**
-- The error reporting mechanism of the language is quite primitive which makes debugging a strenuous task.
-- Since the language is completely functional without any Object oriented features, state management has to be done withing a process and this makes modelling real world applications cumbersome. No information is cached and needs to be sent from one method to another.
-- Looping constructs are primitive. There are no normal 'for' and 'while' loops. It contains alternatives called generators which iterate on enumerables to produce a new enumerable. Within these generators it is not possible to modify any variable, which is again a side-effect of completely functional programming. This shortcoming was countered by implementing our own versoin of looping using a recursive function.
-
 **Pros**
 - It is build for building distributed applications. Hence contructs for creating processes and handling inter-process communication are taken care of.
 - A number of light-weight processes can be spawned and their process tree can be managed.
 - Contains libraries for server level abstractions.
 - Readability of the code is quite good and it is very similar to Ruby, which is known for its elegance as far as readability is concerned. It is possible to contain a lot of logic within small piece of code. 
+
+**Cons**
+- The error reporting mechanism of the language is quite primitive which makes debugging a strenuous task.
+- Since the language is completely functional without any Object oriented features, state management has to be done withing a process and this makes modelling real world applications cumbersome. No information is cached and needs to be sent from one method to another.
+- Looping constructs are primitive. There are no normal 'for' and 'while' loops. It contains alternatives called generators which iterate on enumerables to produce a new enumerable. Within these generators it is not possible to modify any variable, which is again a side-effect of completely functional programming. This shortcoming was countered by implementing our own versoin of looping using a recursive function.
+
