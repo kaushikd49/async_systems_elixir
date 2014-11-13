@@ -103,10 +103,13 @@ defmodule Banking.Master do
      if is_dead do
        tail = elem(chain, tuple_size(chain)-1)
        log("deleted dead tail #{inspect tail}")
+       new_tail = elem(chain, tuple_size(chain)-2)
        new_chain = List.to_tuple(
         for i <- 0..tuple_size(chain)-2 do
           elem(chain,i)
-        end) 
+        end)
+        log("making tail #{inspect new_tail}")
+        GenServer.call(new_tail, [set_tail: true]) 
      end
      chain
    end

@@ -48,6 +48,8 @@ defmodule Banking.Server do
       log("current state: #{inspect state}")
       [response, new_state] = 
        cond do
+         arg[:set_tail] -> ["done", Keyword.put(state, :set_tail, arg[:set_tail])
+]
          is_dead?(state) -> ["dead", state]
          arg[:send_hrtbeat] != nil -> send_hrtbeat(state)
          arg[:handle_adjust_tail] != nil -> handle_adjust_tail(arg, state)
@@ -137,7 +139,7 @@ defmodule Banking.Server do
             outcome = Banking.CustomerAccounts.update_account(state[:accounts], arg)
             return_response(server_side_req_id, outcome, state, arg)
         end
-        if state[:next] && arg[:type] != :get_balance do
+        if !state[:set_tail] and state[:next] && arg[:type] != :get_balance do
           log("passing update to next server #{inspect state[:next]}")
           GenServer.call(state[:next], arg)
         else
