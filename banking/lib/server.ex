@@ -27,6 +27,11 @@ defmodule Banking.Server do
           opts[:death] -> elem(opts[:death], opts[:index])
           true -> [:unbounded, 100]
         end
+      if(death_val == "random") do
+        death_val = :random.uniform * 20
+        log("random deathval set to #{death_val}")
+      end
+
       server = self()
       server_child = spawn_link(fn -> __MODULE__.loop(server) end) 
       [sleep_time, accounts] = [opts[:delay], Banking.CustomerAccounts.init()]
