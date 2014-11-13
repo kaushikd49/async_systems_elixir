@@ -88,8 +88,14 @@ defmodule Banking.Master do
 
    def check_head_uptime(chain, head, uptime_dict) do
      is_dead = is_dead?(head, uptime_dict, "head")
-     
-     chain
+     new_chain = chain
+     # delete the current head
+     if is_dead do
+       [h|remaining] = Tuple.to_list(chain) 
+       log("deleted dead head #{inspect h}")
+       new_chain = List.to_tuple(remaining) 
+     end
+     new_chain
    end
 
    def check_tail_uptime(chain, tail, uptime_dict) do

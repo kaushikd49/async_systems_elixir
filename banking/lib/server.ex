@@ -80,7 +80,6 @@ defmodule Banking.Server do
 
    def dead_state?(state, type, counter_type) do
     res = (state[:death_type] == type and state[counter_type] >= state[:death_val]) 
-    log("Process #{inspect self} dead as count is #{state[counter_type]}")
     res
    end
 

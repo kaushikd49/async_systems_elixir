@@ -23,7 +23,7 @@ use Mix.Config
          name: :FederalBank,
          chain_length: 4,
          ip_addr: {"108.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
-         death: {[:send, 15], [:recv, 3], [:unbounded, 93], [:send, "random"]},
+         death: {[:send, 5], [:recv, 23], [:unbounded, 93], [:send, "random"]},
          delay: 1,
          port: 80
        ],
