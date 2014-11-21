@@ -9,6 +9,7 @@ use Mix.Config
        
        ###  Custom configurations go below ###
      config :general,
+     master: [uptime_fq: 100, uptime_threshold: 5],
      clients: [
          [
            [method: :get_balance, args: ["1.1.1", "acct_name"]],
@@ -24,6 +25,7 @@ use Mix.Config
          chain_length: 4,
          ip_addr: {"108.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
          death: {[:send, 15], [:recv, 23], [:unbounded, 93], [:send, 3]},
+         hbeat_fq: 500,
          delay: 1,
          port: 80
        ],
@@ -32,6 +34,7 @@ use Mix.Config
          chain_length: 4,
          ip_addr: {"109.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
          death: {[:recv, 78], [:unbounded, 83], [:send, 84], [:recv, 94]},
+         hbeat_fq: 500,
          delay: 1,
          port: 80
        ],
@@ -40,6 +43,7 @@ use Mix.Config
          chain_length: 4,
          ip_addr: {"110.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
          death: {[:recv, 24], [:unbounded, 84], [:send, 98], [:recv, 5]},
+         hbeat_fq: 500,
          delay: 1,
          port: 80
        ],
@@ -48,6 +52,7 @@ use Mix.Config
          chain_length: 4,
          ip_addr: {"111.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
          death: {[:recv, 61], [:unbounded, 49], [:send, 47], [:recv, 56]},
+         hbeat_fq: 500,
          delay: 1,
          port: 80
        ],

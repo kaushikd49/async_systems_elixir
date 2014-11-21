@@ -31,12 +31,11 @@ defmodule Banking.Server do
         death_val = :random.uniform * 20
         log("random deathval set to #{death_val}")
       end
-
       server = self()
-      server_child = spawn_link(fn -> __MODULE__.loop(server) end) 
+      server_child = spawn_link(fn -> __MODULE__.loop(server, opts[:hbeat_fq]) end) 
       [sleep_time, accounts] = [opts[:delay], Banking.CustomerAccounts.init()]
 
-      response = [ip: ip, next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length], master: opts[:master], death_type: death_type, death_val: death_val, sent: 0, recvd: 0]
+      response = [ip: ip, next: opts[:next], accounts: accounts, processed_trans: HashDict.new, name: opts[:name], port: opts[:port], delay: opts[:delay], chain_length: opts[:chain_length], master: opts[:master], death_type: death_type, death_val: death_val, sent: 0, recvd: 0, hbeat_fq: opts[:hbeat_fq]]
       log("created server with definition #{inspect response} sleeping for #{sleep_time}ms before initing")
       :timer.sleep(sleep_time)
       {:ok, response}
@@ -73,7 +72,7 @@ defmodule Banking.Server do
 
    def increment_op(state, type, counter_type) do
     state = Keyword.put(state, counter_type, state[counter_type]+1) 
-    log("incrementing conter to #{inspect state[counter_type]}")
+    log("incrementing counter to #{inspect state[counter_type]}")
     if(is_dead?(state)) do
       log("process is now killed as count is #{state[counter_type]}")
     end
@@ -151,7 +150,6 @@ defmodule Banking.Server do
 
     # Function that handles response construction and saves it too.
     def return_response(server_side_req_id, outcome, state, arg) do
-      IO.puts "outcome is #{outcome}"
       account = arg[:account_name]
       balance = Banking.CustomerAccounts.get_balance(state[:accounts], account) 
       resp = [req_id: arg[:req_id], outcome: outcome, balance: balance, account_name: account]  
@@ -185,10 +183,10 @@ defmodule Banking.Server do
       Keyword.put(hash, key, HashDict.put(hash[key], nested_key, nested_val))
     end
 
-   def loop(server) do
-    :timer.sleep(50) # todo: move to config
+   def loop(server, freq) do
+    :timer.sleep(freq) # todo: move to config
     GenServer.call(server, [send_hrtbeat: true])
-    loop(server)
+    loop(server, freq)
    end
 
 

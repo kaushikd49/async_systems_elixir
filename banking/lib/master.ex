@@ -17,9 +17,14 @@ defmodule Banking.Master do
 
    def init(opts) do
     master = self()
-    chains = get_chains(master)
-    master_child = spawn_link(fn -> __MODULE__.loop(master) end) 
-    response = [chains: chains, master_child: master_child, uptime_dict: HashDict.new]
+    IO.inspect opts
+    all_conf = get_conf(opts[:config_file])[:general]
+    chains = get_chains(master, all_conf)
+    master_conf = all_conf[:master]
+    uptime_freq = master_conf[:uptime_fq]
+    master_child = spawn_link(fn -> __MODULE__.loop(master, uptime_freq) end) 
+    response = [chains: chains, master_child: master_child, uptime_dict: HashDict.new, uptime_fq: uptime_freq, uptime_threshold: master_conf[:uptime_threshold]]
+    log("created master #{inspect response}")
     {:ok, response}
    end
 
@@ -46,13 +51,13 @@ defmodule Banking.Master do
 
    # check uptimes for all servers
    def check_uptime(state) do
-    [chains, uptime_dict] = [state[:chains], state[:uptime_dict]]
+    [chains, uptime_dict, threshold] = [state[:chains], state[:uptime_dict], state[:uptime_threshold]]
     num = tuple_size(chains)
     chains = 
     for i <- 0..(num-1) do
       chain = elem(chains, i)
       chain = List.to_tuple(chain)
-      all_uptime_check(chain, i, uptime_dict)
+      all_uptime_check(chain, i, uptime_dict, threshold)
       Tuple.to_list(chain)
     end
     new_state = Keyword.put(state, :chains, List.to_tuple(chains))
@@ -60,34 +65,34 @@ defmodule Banking.Master do
    end
 
 
-   def all_uptime_check(chain, i, uptime_dict) do
+   def all_uptime_check(chain, i, uptime_dict, threshold) do
      log("uptime check for the chain #{i}:#{inspect chain}")
-     chain = check_head_uptime(chain, elem(chain,0), uptime_dict)
-     chain = check_tail_uptime(chain, elem(chain, tuple_size(chain)-1), uptime_dict)
-     chain = chain_uptime_check(chain, uptime_dict)
+     chain = check_head_uptime(chain, elem(chain,0), uptime_dict, threshold)
+     chain = check_tail_uptime(chain, elem(chain, tuple_size(chain)-1), uptime_dict, threshold)
+     chain = chain_uptime_check(chain, uptime_dict, threshold)
    end
 
-   def chain_uptime_check(chain, uptime_dict) do
-    func = fn (chain_tup,i,uptime_dict) -> check_if_server_up(chain_tup,i,uptime_dict) end
-    iterate_and_modify(chain, 1, tuple_size(chain)-2, func, uptime_dict)
+   def chain_uptime_check(chain, uptime_dict, threshold) do
+    func = fn (chain_tup,i,uptime_dict) -> check_if_server_up(chain_tup, i, uptime_dict, threshold) end
+    iterate_and_modify(chain, 1, tuple_size(chain)-2, func, uptime_dict, threshold)
    end
 
-   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i <= stop do
+   def iterate_and_modify(tuple, i, stop, func, uptime_dict, threshold) when i <= stop do
     new_tuple = func.(tuple,i,uptime_dict)
-    iterate_and_modify(new_tuple, i+1, stop, func, uptime_dict)
+    iterate_and_modify(new_tuple, i+1, stop, func, uptime_dict, threshold)
    end
 
-   def iterate_and_modify(tuple, i, stop, func, uptime_dict) when i > stop do; tuple ;end
+   def iterate_and_modify(tuple, i, stop, func, uptime_dict, threshold) when i > stop do; tuple ;end
 
-   def is_dead?(server, uptime_dict, server_type) do
+   def is_dead?(server, uptime_dict, server_type, threshold) do
     uptime = uptime_dict[server] 
-    is_dead = !uptime or Time.now(:secs) - uptime > 5 # todo move this to config
+    is_dead = !uptime or Time.now(:secs) - uptime > threshold # todo move this to config
     log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead}")
     is_dead
    end
 
-   def check_head_uptime(chain, head, uptime_dict) do
-     is_dead = is_dead?(head, uptime_dict, "head")
+   def check_head_uptime(chain, head, uptime_dict, threshold) do
+     is_dead = is_dead?(head, uptime_dict, "head", threshold)
      new_chain = chain
      # delete the current head
      if is_dead do
@@ -98,8 +103,8 @@ defmodule Banking.Master do
      new_chain
    end
 
-   def check_tail_uptime(chain, tail, uptime_dict) do
-    is_dead = is_dead?(tail, uptime_dict, "tail")
+   def check_tail_uptime(chain, tail, uptime_dict, threshold) do
+    is_dead = is_dead?(tail, uptime_dict, "tail", threshold)
      if is_dead do
        tail = elem(chain, tuple_size(chain)-1)
        log("deleted dead tail #{inspect tail}")
@@ -114,29 +119,28 @@ defmodule Banking.Master do
      chain
    end
 
-   def check_if_server_up(chain, i, uptime_dict) do
+   def check_if_server_up(chain, i, uptime_dict, threshold) do
      server = elem(chain,i)
-     is_dead = is_dead?(server, uptime_dict, "intermediate")
+     is_dead = is_dead?(server, uptime_dict, "intermediate", threshold)
     chain
    end
 
 
-   def loop(server) do
-    :timer.sleep(100) # todo: move 10 to config
+   def loop(server, freq) do
+    :timer.sleep(freq) # todo: move 10 to config
     GenServer.call(server, [check_uptime: true])
-    loop(server)
+    loop(server, freq)
    end
 
-  def get_conf do
+  def get_conf(file) do
     use Mix.Config
-    path = Path.expand("test.exs", "./config")
+    path = Path.expand("#{file}.exs", "./config")
     IO.puts "loading configuration #{path}"
     Mix.Config.import_config(path)
     conf = Mix.Config.read!(path)
   end
 
-  def get_chains(master) do
-    all_conf = get_conf()[:general]
+  def get_chains(master, all_conf) do
     chains_conf = all_conf[:servers]
     chains =
     for chain_conf <- Tuple.to_list(chains_conf) do
