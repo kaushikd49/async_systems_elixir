@@ -25,7 +25,7 @@ use Mix.Config
          chain_length: 4,
          hbeat_fq: 100,
          ip_addr: {"108.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
-         death: {[:send, 15], [:recv, 23], [:unbounded, 93], [:send, 3]},
+         death: {[:send, 15], [:recv, 23], [:unbounded, 93], [:send, 30]},
          delay: 1,
          port: 80
        ]

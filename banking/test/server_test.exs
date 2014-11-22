@@ -2,20 +2,23 @@ defmodule Banking.ServerTest do
 
   use ExUnit.Case, async: false
   setup do
-       bank_conf = get_sample_conf()
-       [[head_server, tail_server], servers] = Banking.ServerChain.make_chain_and_get(bank_conf, nil)
-       {:ok, bank_server: head_server}
+    chains = get_chains()
+    [head_server|t] = elem(chains,0)
+    {:ok, bank_server: head_server}
   end
 
+   def get_chains do
+    {:ok, master} = Banking.Master.start_link([config_file: "smalltest"])
+    chains = GenServer.call(master, [get_chains: true])
+   end
+
   def get_sample_conf() do
-    bank_conf =
-      [
-         name: :BankOfAmerica,
-         chain_length: 4,
-         ip_addr: {"109.120.12.1", "108.120.12.2", "108.120.12.3","108.120.12.4"},
-         delay: 10,
-         port: 80
-       ]
+    all_conf = Utils.get_conf("smalltest")
+    confs = all_conf[:general][:servers]
+    IO.inspect confs
+    conf = elem(confs, 0)
+    IO.puts "conf is #{inspect conf}"
+    conf
   end
 
 
@@ -55,13 +58,13 @@ defmodule Banking.ServerTest do
       assert [req_id: req_id, outcome: outcome, balance: expected_balance, account_name: account_name] == resp
    end
 
-  test "chain extension size", %{bank_server: bank_server} do
+  test "chain extension size" do
     [chain, conf] = sample_chain_and_conf()
     [chain, new_chain, new_tail_state] = do_chain_extension(chain, conf)
     assert Utils.sizeoflist(new_chain) == Utils.sizeoflist(chain) + 1 
   end
 
-  test "chain extension history check", %{bank_server: bank_server} do
+  test "chain extension history check" do
     [chain, conf] = sample_chain_and_conf()
     [head, tail] = Utils.get_head_tail(chain)
     deposit_and_assert(head, "4.1.1", "123", 1000, :Processed, 1000)
@@ -72,10 +75,15 @@ defmodule Banking.ServerTest do
   end
 
   def do_chain_extension(chain, conf) do
-    ip_addr = List.to_tuple(Tuple.to_list(conf[:ip_addr]) ++ ["new.ip"])
-    conf = Keyword.put(conf, :ip_addr, ip_addr)
+    conf = add_to_conf(conf, :ip_addr, "new.ip")
+    conf = add_to_conf(conf, :death,[:unbounded, 93] )
     [new_chain, new_tail_state] = Banking.ServerChain.extend_chain(chain, conf)    
     [chain, new_chain, new_tail_state]
+  end
+
+  def add_to_conf(conf, key, additional_val) do
+    tup = List.to_tuple(Tuple.to_list(conf[key]) ++ [additional_val])
+    conf = Keyword.put(conf, key, tup)
   end
 
   def sample_chain_and_conf() do

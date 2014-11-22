@@ -18,7 +18,7 @@ defmodule Banking.Master do
    def init(opts) do
     master = self()
     IO.inspect opts
-    all_conf = get_conf(opts[:config_file])[:general]
+    all_conf = Utils.get_conf(opts[:config_file])[:general]
     chains = get_chains(master, all_conf)
     master_conf = all_conf[:master]
     uptime_freq = master_conf[:uptime_fq]
@@ -85,9 +85,9 @@ defmodule Banking.Master do
    def iterate_and_modify(tuple, i, stop, func, uptime_dict, threshold) when i > stop do; tuple ;end
 
    def is_dead?(server, uptime_dict, server_type, threshold) do
-    uptime = uptime_dict[server] 
-    is_dead = !uptime or Time.now(:secs) - uptime > threshold # todo move this to config
-    log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead}")
+    [uptime, now] = [uptime_dict[server], Utils.now()]
+        is_dead = !uptime or (now - uptime) > threshold # todo move this to config
+    log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead} now:#{now} threshold:#{threshold} update_at:#{uptime}")
     is_dead
    end
 
@@ -127,26 +127,20 @@ defmodule Banking.Master do
 
 
    def loop(server, freq) do
+    log("master sleeping for #{freq}") 
     :timer.sleep(freq) # todo: move 10 to config
-    GenServer.call(server, [check_uptime: true])
+    GenServer.call(server, [check_uptime: true], 2000)
     loop(server, freq)
    end
 
-  def get_conf(file) do
-    use Mix.Config
-    path = Path.expand("#{file}.exs", "./config")
-    IO.puts "loading configuration #{path}"
-    Mix.Config.import_config(path)
-    conf = Mix.Config.read!(path)
-  end
 
   def get_chains(master, all_conf) do
     chains_conf = all_conf[:servers]
     chains =
-    for chain_conf <- Tuple.to_list(chains_conf) do
-      [[h,t], chain] = Banking.ServerChain.make_chain_and_get(chain_conf, master)
-      chain
-    end
+      for chain_conf <- Tuple.to_list(chains_conf) do
+        [[h,t], chain] = Banking.ServerChain.make_chain_and_get(chain_conf, master)
+        chain
+      end
     chains = List.to_tuple(chains)
   end
 

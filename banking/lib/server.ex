@@ -1,7 +1,7 @@
 defmodule Banking.Server do
   use Timex
     def start_link(opts \\ []) do
-      GenServer.start(__MODULE__, opts)
+      GenServer.start_link(__MODULE__, opts)
     end
 
     def make_transaction(server, arg) do
@@ -21,6 +21,7 @@ defmodule Banking.Server do
     end
 
     def init(opts) do
+      IO.puts "received opts for initing #{inspect opts}"
       ip = elem(opts[:ip_addr], opts[:index])
       [death_type, death_val] = 
         cond do 
@@ -89,12 +90,12 @@ defmodule Banking.Server do
      resp =
        cond do
          state[:master] != nil ->
-           heartbeat = Time.now(:secs)
+           heartbeat = Utils.now()
            log("sending heartbeat:#{heartbeat} to master") 
            resp = GenServer.call(state[:master], [heartbeat: heartbeat])
-           log("resp from master after sending heartbeat was #{inspect resp}")
+           #log("resp from master after sending heartbeat was #{inspect resp}")
            "sent_heartbeat"
-        true -> "didnt_send_hbeat"
+        true -> :dead_no_hbeat
        end
      [resp, state]
    end
@@ -184,9 +185,14 @@ defmodule Banking.Server do
     end
 
    def loop(server, freq) do
+     IO.puts "freq is #{freq}"
     :timer.sleep(freq) # todo: move to config
-    GenServer.call(server, [send_hrtbeat: true])
-    loop(server, freq)
+    resp = GenServer.call(server, [send_hrtbeat: true])
+    IO.puts "resp #{inspect resp}"
+    cond do
+      resp != "dead" -> loop(server, freq)
+      true -> log("not invoking sendbeat from #{inspect server}")
+    end
    end
 
 
