@@ -185,7 +185,6 @@ defmodule Banking.Server do
     end
 
    def loop(server, freq) do
-     IO.puts "freq is #{freq}"
     :timer.sleep(freq) # todo: move to config
     resp = GenServer.call(server, [send_hrtbeat: true])
     IO.puts "resp #{inspect resp}"

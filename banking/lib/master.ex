@@ -41,7 +41,7 @@ defmodule Banking.Master do
 
    def recv_heartbeat(arg, state, from) do
     from = elem(from, 0)
-    log("receiving hrtbeat")
+    log("receiving hrtbeat #{arg[:heartbeat]} from #{inspect from}")
     [dict, hrtbeat] = [state[:uptime_dict], arg[:heartbeat]]
     dict = HashDict.put(dict, from, hrtbeat)
     new_state = Keyword.put(state, :uptime_dict, dict)
@@ -86,8 +86,9 @@ defmodule Banking.Master do
 
    def is_dead?(server, uptime_dict, server_type, threshold) do
     [uptime, now] = [uptime_dict[server], Utils.now()]
-        is_dead = !uptime or (now - uptime) > threshold # todo move this to config
-    log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead} now:#{now} threshold:#{threshold} update_at:#{uptime}")
+    is_dead = !uptime or (now - uptime) > threshold # todo move this to config
+    diff = uptime && now-uptime
+    log("#{server_type} uptime check #{inspect server} is_dead:#{is_dead} now:#{now} threshold:#{threshold} update_at:#{uptime} diff:#{diff}")
     is_dead
    end
 

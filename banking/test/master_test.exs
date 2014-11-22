@@ -11,6 +11,9 @@ defmodule Banking.MasterTest do
   test "failure detection with dying servers" do
     chains = get_chains()
     [bank_server|t] = elem(chains,0)
+    Utils.log "sleeping like a boss"
+    :timer.sleep(20000)
+    Utils.log "sleeping done"
     deposit_and_assert(bank_server, "1.3.0", "124", 1000, :Processed, 1000)
     deposit_and_assert(bank_server, "1.3.1", "124", 1000, :Processed, 2000)
     deposit_and_assert(bank_server, "1.3.2", "124", 1000, :Processed, 3000)
